@@ -31,6 +31,7 @@ infectious_diseases <- diseases$disease[diseases$class=="infectious"]
 psychiatric_diseases <- diseases$disease[diseases$class=="psychiatric"]
 
 #####calculate the number of genes per year per disease and class#####
+#genes per year per disease
 for (i in 1:length(diseases$disease)){
   dis <- diseases$disease[i]
   class <- diseases$class[i]
@@ -74,6 +75,41 @@ genes_per_year_all_melt$class <- c(rep("inflammatory",27),
 
 colnames(genes_per_year_all_melt) <- c("dis","year","genes","class")
 
+#genes per year per class
+classes <- c("inflammatory","psychiatric","infectious")
+for (i in 1:3){
+  df_class <- edges_list[[i]]
+  class <- classes[i]
+  cols <- colnames(df_class[-c(1,2)])
+  for (j in 1:29){
+    year <- as.numeric(gsub(x = cols[j],pattern = "Doc.",replacement = ""))
+    col <- which(colnames(df_class)==cols[j])
+    genes <- df_class %>%
+      select(1,2,col) %>%
+      rename(docs=3) %>%
+      filter(docs > 0) %>%
+      pull(Source) %>%
+      unique() %>%
+      length()
+    gen_y <- data.frame(class=class,genes=genes)
+    colnames(gen_y) <- c("dis",year)
+    if (j==1){
+      genes_year <- gen_y
+    }else{
+      genes_year <- cbind(genes_year,gen_y[,-1])
+      colnames(genes_year) <- c(colnames(genes_year)[1:j],year)
+    }
+  }
+  if(i==1){
+    genes_per_year_classes <- genes_year
+  }else{
+    genes_per_year_classes <- as.data.frame(rbind(genes_per_year_classes,genes_year))
+  }  
+}
+
+save(genes_per_year_classes,file="data/genes_per_year_classes.RData")
+write.csv(genes_per_year_classes,file = "data/genes_per_year_classes.csv",quote = F,row.names = F)
+
 #####plot results of genes per year#####
 #line graph of genes per year in each disease class
 svg(filename = "figures/genes_per_year_lines.svg")
@@ -111,6 +147,13 @@ gene_variation <- as.data.frame(t(apply(genes_per_year_all[,-1], 1, diff)))
 rownames(gene_variation) <- genes_per_year_all$dis
 gene_variation$disease <- rownames(gene_variation)
 gene_variation <- gene_variation[,c(29,1:28)]
+
+gene_variation_percent <- gene_variation
+for (i in 2:length(gene_variation)){
+  col <- gene_variation[,i]
+  col_norm <- col/sum(col)
+  gene_variation_percent[,i] <- col_norm
+}
 
 save(gene_variation,file = "data/gene_variation.RData")
 write.csv(gene_variation,file = "data/gene_variation.csv",quote = F,row.names = F)
