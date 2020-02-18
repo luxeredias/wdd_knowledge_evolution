@@ -6,20 +6,21 @@ library(stringr)
 library(dplyr)
 library(clusterProfiler)
 library(ggplot2)
+library(reshape2)
+library(tibble)
+options(stringsAsFactors = F)
 
 library(tidyr)
 library(purrr)
 library(patchwork)
 library(msigdbr)
 
-library(tibble)
-
 library(readr)
 library(igraph)
 
 
 library(gplots)
-library(reshape2)
+
 library(lattice)
 library(corrplot)
 library(ggridges)
@@ -48,9 +49,9 @@ reactome_GMT_converted$reactome_Id <- as.character(str_extract_all(string = reac
                                                       pattern = "R-HSA-\\d+"))
 reactome_GMT_converted$ont <- str_remove_all(string = reactome_GMT_converted$ont,
                                              pattern = " Homo sapiens R-HSA-\\d+")
-selected_terms <- read.csv("data/picked_terms_reactome.txt",col.names = "term")
+picked_terms <- read.csv("data/picked_terms_reactome.txt",col.names = "term")
 reactome_GMT_selected <- reactome_GMT_converted %>%
-  dplyr::filter(ont %in% selected_terms$term) %>%
+  dplyr::filter(ont %in% picked_terms$term) %>%
   dplyr::select(1,2)
 
 all_edges_converted <- all_edges_converted %>%
@@ -66,6 +67,8 @@ all_genes <- all_edges_converted %>%
 #select the top 9 most connected diseases in 2018
 top_9_all <- c()
 Reactome_results_all_list <- list()
+selected_terms_list <- list()
+selected_terms_years_list <- list()
 for (i in 1:3){
   #selecte edges of each disease type
   class <- classes[i]
@@ -107,56 +110,49 @@ for (i in 1:3){
           full_join(reactome_results,by="Term")
       }})
   }
-  #save aggregated results to results_all lists
+  
+  #save aggregated results to Reactome_results_all list
   Reactome_results_all_list[[i]] <- reactome_results_all
-  print(paste(dis_type[i],"done"))
-  #plot reactome enrichment for each disease class
+  
+  #plot results
+  data_plot <- reactome_results_all
+  data_plot[is.na(data_plot)] <- 1
+  data_plot <- data_plot %>%
+    column_to_rownames("Term")
+  data_plot <- -log(data_plot)
   pal <- colorRampPalette(c("white",color[i]))(1000)
-  data <- reactome_results_all
-  data[is.na(data)] <- 1
-  rownames(data) <- data$Term
-  data$Term <- NULL
-  data <- -log(data)
-  filename <- paste0("figures/",dis_type[i],"_reactome.svg")
+  filename <- paste0("figures/",classes[i],"_Reactome.svg")
   svg(filename,width = 10,height = 10)
-  heatmap(as.matrix(data[-1,]),
-          col=pal,scale = "none",margins = c(15,40), #margin = c(col,row)
-          cexRow = .6,
-          cexCol = .5)
-  dev.off()
-}
-
-selected_terms_list <- list()
-selected_terms_years_list <- list()
-for (i in 1:3){
-  data <- Reactome_results_all_list[[i]]
-  data[is.na(data)] <- 1
-  #data$Term <- gsub(x = data$Term,pattern = "KEGG_",replacement = "")
-  #data$Term <- gsub(x = data$Term,pattern = "_",replacement = " ")
-  rownames(data) <- data$Term
-  data$Term <- NULL
-  data <- -log(data)
-  pal <- colorRampPalette(c("white",color[i]))(1000)
-  filename <- paste0("~/Área de Trabalho/Papers_Helder/Evolution_all/Figures/Figure_02/Version_02/",dis_type[i],"_Reactome_v2.0.svg")
-  svg(filename,width = 10,height = 10)
-  heatmap(as.matrix(data),
+  heatmap(as.matrix(data_plot),
           col=pal,scale = "none",margins = c(10,30), #margin = c(col,row)
           cexRow = .6,
           cexCol = .5)
   dev.off()
-  PA <- data
-  PA[PA>0] <- 1
-  nterms <- c()
-  for (g in 1:ncol(PA)){
-    selected_terms <- rownames(PA[rowSums(PA)>g,])
-    nterms <- c(nterms,length(selected_terms))
+  
+  #select terms to be used in evolution analysis: terms that were enriched
+  #in the majority of the top 9 diseases in each category
+  
+  #get the 20 terms that are enriched in the highest number of diseases
+  terms <- data.frame(term=unique(rownames(data_plot)),
+                      enriched_in=as.numeric(""))
+  
+  for (t in 1:length(terms$term)){
+    term <- terms$term[t]
+    df <- data_plot %>%
+      filter(rownames(data_plot)==term) %>%
+      t()
+    diseases_with_enrichment <- table(df>0)["TRUE"]
+    terms$enriched_in[t] <- diseases_with_enrichment
   }
-  nterms <- abs(10-nterms)
-  g<-which(nterms==min(nterms))
-  selected_terms <- c(rownames(PA[rowSums(PA)>g,]),picked_terms)  
+  selected_terms <- terms %>%
+    arrange(desc(enriched_in)) %>%
+    pull(term) %>%
+    .[1:20]
+  
   selected_terms_list[[i]] <- selected_terms
-  data_selected <- data[rownames(data) %in% selected_terms,]
-  filename <- paste0("~/Área de Trabalho/Papers_Helder/Evolution_all/Figures/Figure_02/Version_02/",dis_type[i],"_selected_terms.svg")
+  
+  data_selected <- data_plot[rownames(data_plot) %in% selected_terms,]
+  filename <- paste0("figures/",classes[i],"_selected_terms.svg")
   svg(filename,width = 5,height = 5)
   heatmap(as.matrix(data_selected[,colSums(data_selected)>0]),
           col=pal,scale = "none",margins = c(8,15), #margin = c(col,row)
@@ -166,7 +162,9 @@ for (i in 1:3){
 }
 
 
-#perform enrichment for all diseases in each year
+
+
+#perform enrichment for all diseases in each year for the selected terms
 for (i in 1:27){
   dis <- top_9_all[i]
   df <- all_edges_converted %>%
