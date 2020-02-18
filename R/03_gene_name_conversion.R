@@ -16,11 +16,12 @@ data("all_edges")
 all_edges <- bind_rows(edges_list)
 genes_diseases <- unique(all_edges$Source)
 
-reactome_GMT <- read.gmt("data/Filtered_Reactome_2016.txt") 
-genes_GMT <- unique(reactome_GMT$gene)
-
 genes_diseases_converted <- alias2official_gene_symbol(genes = genes_diseases,
                                                        manualSearch = T)
+
+reactome_GMT <- read.gmt("data/Filtered_Reactome_2016.txt")
+reactome_GMT <- read.gmt("data/ReactomePathwaysLevel3.gmt") 
+genes_GMT <- unique(reactome_GMT$gene)
 
 genes_GMT_converted <- alias2official_gene_symbol(genes = genes_GMT,
                                                   manualSearch = T)

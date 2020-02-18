@@ -49,6 +49,8 @@ reactome_GMT_converted$reactome_Id <- as.character(str_extract_all(string = reac
                                                       pattern = "R-HSA-\\d+"))
 reactome_GMT_converted$ont <- str_remove_all(string = reactome_GMT_converted$ont,
                                              pattern = " Homo sapiens R-HSA-\\d+")
+reactome_GMT_converted <- read.gmt("data/ReactomePathwaysLevel3.gmt")
+
 picked_terms <- read.csv("data/picked_terms_reactome.txt",col.names = "term")
 reactome_GMT_selected <- reactome_GMT_converted %>%
   dplyr::filter(ont %in% picked_terms$term) %>%
@@ -144,6 +146,7 @@ for (i in 1:3){
     diseases_with_enrichment <- table(df>0)["TRUE"]
     terms$enriched_in[t] <- diseases_with_enrichment
   }
+  
   selected_terms <- terms %>%
     arrange(desc(enriched_in)) %>%
     pull(term) %>%
@@ -159,9 +162,16 @@ for (i in 1:3){
           cexRow = .6,
           cexCol = .5)
   dev.off()
+  print(paste0(classes[i]," done"))
 }
 
+all_selected_terms <- unique(unlist(selected_terms_list))
 
+common_terms <- Reduce(intersect,selected_terms_list)
+
+inflammatory_unique_terms <- setdiff(selected_terms_list[[1]],common_terms)
+psichiatric_unique_terms <- setdiff(selected_terms_list[[2]],common_terms)
+infectious_unique_terms <- setdiff(selected_terms_list[[3]],common_terms)
 
 
 #perform enrichment for all diseases in each year for the selected terms
