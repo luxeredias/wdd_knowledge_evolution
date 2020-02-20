@@ -38,6 +38,7 @@ setwd(dir)
 #load necessary data
 data("all_edges_converted")
 data("reactome_GMT_converted")
+data("all_edges")
 data("diseases")
 
 #useful objects
@@ -191,7 +192,6 @@ common_all_terms <- Reduce(intersect,all_terms_list)
 inflammatory_unique_terms <- setdiff(selected_terms_list[[1]],common_terms)
 psichiatric_unique_terms <- setdiff(selected_terms_list[[2]],common_terms)
 infectious_unique_terms <- setdiff(selected_terms_list[[3]],common_terms)
-
 
 #perform enrichment for all diseases in each year for the selected terms
 evolution_reactome_list <- list()
