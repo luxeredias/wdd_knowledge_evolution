@@ -10,26 +10,21 @@ library(reshape2)
 library(tibble)
 options(stringsAsFactors = F)
 
-library(tidyr)
-library(purrr)
-library(patchwork)
-library(msigdbr)
-
-library(readr)
-library(igraph)
-
-
-library(gplots)
-
-library(lattice)
-library(corrplot)
-library(ggridges)
-library(enrichR)
-library(rvest)
-library(httr)
-library(heatmaply)
-library(VennDiagram)
-options(stringsAsFactors = F)
+# library(tidyr)
+# library(purrr)
+# library(patchwork)
+# library(msigdbr)
+# library(readr)
+# library(igraph)
+# library(gplots)
+# library(lattice)
+# library(corrplot)
+# library(ggridges)
+# library(enrichR)
+# library(rvest)
+# library(httr)
+# library(heatmaply)
+# library(VennDiagram)
 
 #set working directory
 dir <- "~/Área de Trabalho/GitHub_projects/wdd_knowledge_evolution/"
@@ -37,7 +32,11 @@ setwd(dir)
 
 #load necessary data
 data("all_edges_converted")
+all_edges_converted <- all_edges_converted %>%
+  dplyr::filter(!Source=="")
 data("reactome_GMT_converted")
+#data("cannonical_GMT_converted")
+#data("reactome_full_GMT_converted")
 data("all_edges")
 data("diseases")
 
@@ -53,14 +52,6 @@ reactome_GMT_converted$reactome_Id <- as.character(str_extract_all(string = reac
                                                       pattern = "R-HSA-\\d+"))
 reactome_GMT_converted$ont <- str_remove_all(string = reactome_GMT_converted$ont,
                                              pattern = " Homo sapiens R-HSA-\\d+")
-
-picked_terms <- read.csv("data/picked_terms_reactome.txt",col.names = "term")
-reactome_GMT_selected <- reactome_GMT_converted %>%
-  dplyr::filter(ont %in% picked_terms$term) %>%
-  dplyr::select(1,2)
-
-all_edges_converted <- all_edges_converted %>%
-  dplyr::filter(!Source=="")
 
 all_genes <- all_edges_converted %>%
   dplyr::select(1,2,31) %>%
@@ -95,11 +86,10 @@ for (i in 1:3){
     #Reactome enrichment
     tryCatch({reactome_results <- enricher(gene = genes,pvalueCutoff = 0.05,
                                            pAdjustMethod = "none",
-                                           universe = all_genes,
-                                           TERM2GENE = reactome_GMT_converted[,-3])
+                                           TERM2GENE = GMT)
     reactome_results <- reactome_results@result
     reactome_results <- reactome_results %>%
-      filter(pvalue < 0.05,Count>0) %>%
+      filter(pvalue < 0.01,Count>0) %>%
       dplyr::select(ID,p.adjust)
     colnames(reactome_results) <- c("Term",dis)
     if (j == 1){
@@ -164,7 +154,7 @@ for (i in 1:3){
   selected_terms <- terms %>%
     arrange(desc(enriched_in)) %>%
     pull(term) %>%
-    .[1:20]
+    .[1:40]
   
   selected_terms_list[[i]] <- selected_terms
   
@@ -205,25 +195,24 @@ for (i in 1:27){
   for (j in 1:29){
     col <- which(colnames(df)==cols[j])
     genes_year <- all_edges_converted %>%
-      select(1,2,col) %>%
-      rename(docs=3) %>%
-      filter(docs > 0) %>%
-      pull(Source) %>%
+      dplyr::select(1,2,col) %>%
+      dplyr::rename(docs=3) %>%
+      dplyr::filter(docs > 0) %>%
+      dplyr::pull(Source) %>%
       unique()
     
     genes <- df %>%
-      select(1,2,31) %>%
-      rename(docs=3) %>%
-      filter(docs > 0) %>%
-      pull(Source) %>%
+      dplyr::select(1,2,31) %>%
+      dplyr::rename(docs=3) %>%
+      dplyr::filter(docs > 0) %>%
+      dplyr::pull(Source) %>%
       unique()
     
     #reactome enrichment
     if (length(genes)>0){
         reactome_results <- enricher(gene = genes,pvalueCutoff = 0.05,
-                                     pAdjustMethod = "BH",
-                                     universe = genes_year,
-                                     TERM2GENE = reactome_GMT_converted[,-3])
+                                     pAdjustMethod = "none",
+                                     TERM2GENE = GMT)
         if (length(reactome_results)==0){
           reactome_results <- data.frame(Term="",x=as.numeric(""))
           colnames(reactome_results) <- c("Term",dis)
