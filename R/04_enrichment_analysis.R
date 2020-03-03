@@ -154,7 +154,7 @@ for (i in 1:3){
   selected_terms <- terms %>%
     arrange(desc(enriched_in)) %>%
     pull(term) %>%
-    .[1:40]
+    .[1:20]
   
   selected_terms_list[[i]] <- selected_terms
   
@@ -202,7 +202,7 @@ for (i in 1:27){
       unique()
     
     genes <- df %>%
-      dplyr::select(1,2,31) %>%
+      dplyr::select(1,2,col) %>%
       dplyr::rename(docs=3) %>%
       dplyr::filter(docs > 0) %>%
       dplyr::pull(Source) %>%
@@ -260,19 +260,33 @@ for (i in 1:27){
 }
 
 names(evolution_reactome_list) <- unlist(top_9_list)
-
 evolution_reactome_melt <- bind_rows(evolution_reactome_melt_list)
 
 evolution_reactome_melt$class <- ifelse(evolution_reactome_melt$dis %in% inflammatory_diseases,yes = "inflammatory",no="")
 evolution_reactome_melt$class <- ifelse(evolution_reactome_melt$dis %in% psychiatric_diseases,yes = "psychiatric",no=evolution_reactome_melt$class)
 evolution_reactome_melt$class <- ifelse(evolution_reactome_melt$dis %in% infectious_diseases,yes = "infectious",no=evolution_reactome_melt$class)
 
+evolution_reactome_cast <- dcast(evolution_reactome_melt,formula = Term~variable+dis)
+evolution_reactome_cast[is.na(evolution_reactome_cast)] <- 0
+
+evolution_reactome_melt_2 <- melt(evolution_reactome_cast)
+evolution_reactome_melt_2$year <- as.numeric(substr(evolution_reactome_melt_2$variable,start = 1,stop = 4))
+evolution_reactome_melt_2$variable <- str_sub(evolution_reactome_melt_2$variable,start = 6,end = str_length(evolution_reactome_melt_2$variable))
+evolution_reactome_melt_2 <- evolution_reactome_melt_2[,c(1,4,3,2)]
+colnames(evolution_reactome_melt_2) <- c("Term","year","value","dis")
+
+evolution_reactome_melt_2$class <- ifelse(evolution_reactome_melt_2$dis %in% inflammatory_diseases,yes = "inflammatory",no="")
+evolution_reactome_melt_2$class <- ifelse(evolution_reactome_melt_2$dis %in% psychiatric_diseases,yes = "psychiatric",no=evolution_reactome_melt_2$class)
+evolution_reactome_melt_2$class <- ifelse(evolution_reactome_melt_2$dis %in% infectious_diseases,yes = "infectious",no=evolution_reactome_melt_2$class)
+
+evolution_reactome_melt <- evolution_reactome_melt_2
+
 pdf("figures/all_terms_evolution.pdf")
 for (i in 1:length(unique(evolution_reactome_melt$Term))){
   term <- unique(evolution_reactome_melt$Term)[i]
   p<-evolution_reactome_melt %>%
     filter(Term==term) %>%
-    ggplot(aes(x=variable,y=dis,fill=class,alpha=log(value+1)))+
+    ggplot(aes(x=year,y=dis,fill=class,alpha=log(value+1)))+
       geom_tile(show.legend = F)+
       theme_minimal(base_line_size = .1)+
       theme(axis.title.y = element_blank(),
@@ -286,3 +300,50 @@ for (i in 1:length(unique(evolution_reactome_melt$Term))){
   print(p)
 }  
 dev.off()
+
+all_terms_evolution <- unique(evolution_reactome_melt$Term)
+
+term_network <- GMT %>%
+  filter(ont %in% all_terms_evolution)
+
+colnames(term_network) <- c("Source","Target")
+
+term_nodes <- data.frame(Id=unique(c(term_network$Source,term_network$Target)),
+                         Label=unique(c(term_network$Source,term_network$Target)))
+term_nodes$Class <- c(rep("Term",151),rep("Gene",4779))
+
+write.csv(term_network,file="data/term_network_edges.csv",quote = T,row.names = F)
+write.csv(term_nodes,file="data/term_network_nodes.csv",quote = T,row.names = F)
+
+term_term_network <- as.data.frame(t(combn(all_terms_evolution,2)))
+colnames(term_term_network) <- c("Source","Target")
+
+for (i in 1:length(term_term_network$Source)){
+  term_1 <- term_term_network$Source[i]
+  term_2 <- term_term_network$Target[i]
+  genes_1 <- term_network %>%
+    filter(Source==term_1) %>%
+    pull(Target) %>%
+    unique()
+  genes_2 <- term_network %>%
+    filter(Source==term_2) %>%
+    pull(Target) %>%
+    unique()
+  comm <- intersect(genes_1,genes_2)
+  pval <- round(phyper(q = length(comm)-1,
+                       m = length(genes_1),
+                       n = length(unique(term_network$Target))-length(genes_1),
+                       k = length(genes_2),
+                       lower.tail = F),
+                digits = 10000)
+  term_term_network$pval[i] <- pval
+  term_term_network$comm[i] <- length(comm)
+}
+
+term_term_network$logpval <- -log(term_term_network$pval)
+term_term_nodes <- data.frame(Id=all_terms_evolution,
+                              Label=all_terms_evolution)
+
+write.csv(term_term_network,file="data/term_term_network_edges.csv",row.names = F)
+write.csv(term_term_nodes,file="data/term_term_network_nodes.csv",row.names = F)
+
