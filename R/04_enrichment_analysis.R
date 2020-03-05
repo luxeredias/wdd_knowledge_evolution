@@ -10,22 +10,6 @@ library(reshape2)
 library(tibble)
 options(stringsAsFactors = F)
 
-# library(tidyr)
-# library(purrr)
-# library(patchwork)
-# library(msigdbr)
-# library(readr)
-# library(igraph)
-# library(gplots)
-# library(lattice)
-# library(corrplot)
-# library(ggridges)
-# library(enrichR)
-# library(rvest)
-# library(httr)
-# library(heatmaply)
-# library(VennDiagram)
-
 #set working directory
 dir <- "~/Área de Trabalho/GitHub_projects/wdd_knowledge_evolution/"
 setwd(dir)
@@ -65,6 +49,8 @@ top_9_list <- list()
 Reactome_results_all_list <- list()
 selected_terms_list <- list()
 all_terms_list <- list()
+GMT <- reactome_GMT_converted[,-3]
+save(GMT,file="data/GMT.RData")
 for (i in 1:3){
   #selecte edges of each disease type
   class <- classes[i]
@@ -179,15 +165,16 @@ all_terms <- unique(unlist(all_terms_list))
 common_selected_terms <- Reduce(intersect,selected_terms_list)
 common_all_terms <- Reduce(intersect,all_terms_list)
 
-inflammatory_unique_terms <- setdiff(selected_terms_list[[1]],common_terms)
-psichiatric_unique_terms <- setdiff(selected_terms_list[[2]],common_terms)
-infectious_unique_terms <- setdiff(selected_terms_list[[3]],common_terms)
+# inflammatory_unique_terms <- setdiff(selected_terms_list[[1]],common_terms)
+# psichiatric_unique_terms <- setdiff(selected_terms_list[[2]],common_terms)
+# infectious_unique_terms <- setdiff(selected_terms_list[[3]],common_terms)
 
 #perform enrichment for all diseases in each year for the selected terms
 evolution_reactome_list <- list()
 evolution_reactome_melt_list <- list()
-for (i in 1:27){
-  dis <- unlist(top_9_list)[i]
+for (i in 1:99){
+  # dis <- unlist(top_9_list)[i]
+  dis <- unique(all_edges_converted$Target)[i]
   df <- all_edges_converted %>%
     filter(Target==dis)
   cols <- colnames(df)[-c(1,2)]
@@ -255,11 +242,16 @@ for (i in 1:27){
   evolution_reactome_list[[i]] <- reactome_results_all
   
   reactome_results_melt <- melt(reactome_results_all)
-  reactome_results_melt$dis <- dis
-  evolution_reactome_melt_list[[i]] <- reactome_results_melt
+  if (length(reactome_results_all$Term)==0){
+    evolution_reactome_melt_list[[i]] <- reactome_results_melt
+  }else{
+    reactome_results_melt$dis <- dis
+    evolution_reactome_melt_list[[i]] <- reactome_results_melt
+  }
 }
 
-names(evolution_reactome_list) <- unlist(top_9_list)
+#names(evolution_reactome_list) <- unlist(top_9_list)
+names(evolution_reactome_list) <- unique(all_edges_converted$Target)
 evolution_reactome_melt <- bind_rows(evolution_reactome_melt_list)
 
 evolution_reactome_melt$class <- ifelse(evolution_reactome_melt$dis %in% inflammatory_diseases,yes = "inflammatory",no="")
@@ -279,8 +271,10 @@ evolution_reactome_melt_2$class <- ifelse(evolution_reactome_melt_2$dis %in% inf
 evolution_reactome_melt_2$class <- ifelse(evolution_reactome_melt_2$dis %in% psychiatric_diseases,yes = "psychiatric",no=evolution_reactome_melt_2$class)
 evolution_reactome_melt_2$class <- ifelse(evolution_reactome_melt_2$dis %in% infectious_diseases,yes = "infectious",no=evolution_reactome_melt_2$class)
 
+top_9_all <- unlist(top_9_list)
 evolution_reactome_melt <- evolution_reactome_melt_2
 
+#plot evolution of all terms for all diseases
 pdf("figures/all_terms_evolution.pdf")
 for (i in 1:length(unique(evolution_reactome_melt$Term))){
   term <- unique(evolution_reactome_melt$Term)[i]
@@ -298,52 +292,52 @@ for (i in 1:length(unique(evolution_reactome_melt$Term))){
       scale_fill_manual(values = c(color[3],color[1],color[2]))+
       theme(strip.text = element_text(size = 8))
   print(p)
+}
+dev.off()
+
+#plot evolution of common terms for all diseases
+pdf("figures/common_terms_all_dis_evolution.pdf")
+for (i in 1:length(common_all_terms)){
+  term <- common_all_terms[i]
+  p<-evolution_reactome_melt %>%
+    filter(Term==term) %>%
+    ggplot(aes(x=year,y=dis,fill=class,alpha=log(value+1)))+
+    geom_tile(show.legend = F)+
+    theme_minimal(base_line_size = .1)+
+    theme(axis.title.y = element_blank(),
+          #axis.text.y = element_blank(),
+          axis.text.x = element_blank())+
+    scale_x_discrete(limits = c(1990,2000,2010,2018),name="Year")+
+    facet_grid(rows = vars(class),cols = vars(Term), scales = "free", space = "free")+
+    #facet_wrap(facets = ~term,scales = "free")+
+    scale_fill_manual(values = c(color[3],color[1],color[2]))+
+    theme(strip.text = element_text(size = 8))
+  print(p)
 }  
 dev.off()
 
-all_terms_evolution <- unique(evolution_reactome_melt$Term)
+#plot evolution of common terms for top 9 diseases in each category
+pdf("figures/common_terms_top_9_dis_evolution.pdf")
+for (i in 1:length(common_all_terms)){
+  term <- common_all_terms[i]
+  p<-evolution_reactome_melt %>%
+    filter(Term==term & dis %in% top_9_all) %>%
+    ggplot(aes(x=year,y=dis,fill=class,alpha=log(value+1)))+
+    geom_tile(show.legend = F)+
+    theme_minimal(base_line_size = .1)+
+    theme(axis.title.y = element_blank(),
+          #axis.text.y = element_blank(),
+          axis.text.x = element_blank())+
+    scale_x_discrete(limits = c(1990,2000,2010,2018),name="Year")+
+    facet_grid(rows = vars(class),cols = vars(Term), scales = "free", space = "free")+
+    #facet_wrap(facets = ~term,scales = "free")+
+    scale_fill_manual(values = c(color[3],color[1],color[2]))+
+    theme(strip.text = element_text(size = 8))
+  print(p)
+}  
+dev.off()
 
-term_network <- GMT %>%
-  filter(ont %in% all_terms_evolution)
 
-colnames(term_network) <- c("Source","Target")
 
-term_nodes <- data.frame(Id=unique(c(term_network$Source,term_network$Target)),
-                         Label=unique(c(term_network$Source,term_network$Target)))
-term_nodes$Class <- c(rep("Term",151),rep("Gene",4779))
 
-write.csv(term_network,file="data/term_network_edges.csv",quote = T,row.names = F)
-write.csv(term_nodes,file="data/term_network_nodes.csv",quote = T,row.names = F)
-
-term_term_network <- as.data.frame(t(combn(all_terms_evolution,2)))
-colnames(term_term_network) <- c("Source","Target")
-
-for (i in 1:length(term_term_network$Source)){
-  term_1 <- term_term_network$Source[i]
-  term_2 <- term_term_network$Target[i]
-  genes_1 <- term_network %>%
-    filter(Source==term_1) %>%
-    pull(Target) %>%
-    unique()
-  genes_2 <- term_network %>%
-    filter(Source==term_2) %>%
-    pull(Target) %>%
-    unique()
-  comm <- intersect(genes_1,genes_2)
-  pval <- round(phyper(q = length(comm)-1,
-                       m = length(genes_1),
-                       n = length(unique(term_network$Target))-length(genes_1),
-                       k = length(genes_2),
-                       lower.tail = F),
-                digits = 10000)
-  term_term_network$pval[i] <- pval
-  term_term_network$comm[i] <- length(comm)
-}
-
-term_term_network$logpval <- -log(term_term_network$pval)
-term_term_nodes <- data.frame(Id=all_terms_evolution,
-                              Label=all_terms_evolution)
-
-write.csv(term_term_network,file="data/term_term_network_edges.csv",row.names = F)
-write.csv(term_term_nodes,file="data/term_term_network_nodes.csv",row.names = F)
 
