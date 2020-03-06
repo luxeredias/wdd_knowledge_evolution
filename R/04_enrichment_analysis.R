@@ -442,3 +442,72 @@ p <- evolution_reactome_melt %>%
 print(p)
 dev.off()
 
+#calculate the percentage of diseases enriched for each selected term
+#in each year (separated by category of disease)
+for (i in 1:3){
+  class <- classes[i]
+  nsig_all_years_percent <- as.data.frame(matrix(nrow = 6,ncol = 29))
+  colnames(nsig_all_years_percent) <- seq(1990,2018,1)
+  rownames(nsig_all_years_percent) <- selected_evolution_terms
+  nsig_all_years_absolute <- nsig_all_years_percent
+  for (k in 1:6){
+    nsigs <- c()
+    termo <- selected_evolution_terms[k]
+    for (j in 1:29){
+      year <- seq(1990,2018,1)[j]
+      nsigs_year <- evolution_reactome_melt %>%
+        filter(year==!!year &
+                 Term==termo &
+                 class==!!class &
+                 value > 4.6)
+      nsigs_year <- length(unique(nsigs_year$dis))
+      nsig_all_years_absolute[k,j] <- nsigs_year
+      nsigs_year <- nsigs_year/length(unique(edges_list[[i]]$Target))*100
+      nsig_all_years_percent[k,j] <- nsigs_year
+    }
+  }
+  nsig_all_years_percent <- nsig_all_years_percent %>%
+    rownames_to_column("Term")
+  nsig_all_years_percent_melt <- melt(nsig_all_years_percent)
+  nsig_all_years_percent_melt$class <- class
+  
+  nsig_all_years_absolute <- nsig_all_years_absolute %>%
+    rownames_to_column("Term")
+  nsig_all_years_absolute_melt <- melt(nsig_all_years_absolute)
+  nsig_all_years_absolute_melt$class <- class
+  
+  if (i==1){
+    nsig_all_years_all_percent <- nsig_all_years_percent_melt
+    nsig_all_years_all_absolute <- nsig_all_years_absolute_melt
+  }else{
+    nsig_all_years_all_percent <- as.data.frame(rbind(nsig_all_years_all_percent,nsig_all_years_percent_melt))
+    nsig_all_years_all_absolute <- as.data.frame(rbind(nsig_all_years_all_absolute,nsig_all_years_absolute_melt))
+  }
+}
+
+nsig_all_years_all_percent$variable <- as.numeric(as.character(nsig_all_years_all_percent$variable))
+nsig_all_years_all_absolute$variable <- as.numeric(as.character(nsig_all_years_all_absolute$variable))
+
+#plot line graphs of the percent of diseases that present enrichment
+#for each of the selected terms
+svg("figures/nsig_years_percent_selected_terms_top9.svg",width = 20,height = 5)
+p<-ggplot(nsig_all_years_all_percent,aes(x=variable,y=value,color=class))+
+  geom_line(show.legend = T,size=1)+
+  scale_color_manual(values = c(color[3],color[1],color[2]))+
+  scale_y_continuous(limits=c(0,100))+
+  facet_wrap(facets = ~Term,nrow = 1,ncol=6)+
+  theme_minimal()
+print(p)
+dev.off()
+
+#plot line graphs of the absolute number of diseases that present enrichment
+#for each of the selected terms
+svg("figures/nsig_years_absolute_selected_terms_top9.svg",width = 20,height = 5)
+p<-ggplot(nsig_all_years_all_absolute,aes(x=variable,y=value,color=class))+
+  geom_line(show.legend = T,size=1)+
+  scale_color_manual(values = c(color[3],color[1],color[2]))+
+  scale_y_continuous(limits=c(0,20))+
+  facet_wrap(facets = ~Term,nrow = 1,ncol=6)+
+  theme_minimal()
+print(p)
+dev.off()
