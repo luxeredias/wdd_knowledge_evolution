@@ -100,20 +100,6 @@ for (i in 1:3){
   enrichment_filename <- paste0("data/all_",class,"_reactome_enrichment.csv")
   write.csv(reactome_results_all,file = enrichment_filename,quote = F,row.names = F)
   
-  # #plot results
-  # data_plot <- reactome_results_all
-  # data_plot[is.na(data_plot)] <- 1
-  # data_plot <- data_plot %>%
-  #   column_to_rownames("Term")
-  # data_plot <- -log(data_plot)
-  # filename <- paste0("figures/",classes[i],"_Reactome.svg")
-  # svg(filename,width = length(diss),height = length(rownames(data_plot)))
-  # heatmap(as.matrix(data_plot),
-  #         col=pal,scale = "none",margins = c(10,30), #margin = c(col,row)
-  #         cexRow = .6,
-  #         cexCol = .5)
-  # dev.off()
-  
   #get the 20 terms that are enriched in the highest number of diseases
   #transform enrichment results in -log10pvalue
   data_plot <- reactome_results_all
@@ -140,22 +126,54 @@ for (i in 1:3){
   selected_terms <- terms %>%
     arrange(desc(enriched_in)) %>%
     pull(term) %>%
-    .[1:20]
+    .[1:10]
   
   selected_terms_list[[i]] <- selected_terms
   
   #subset enrichment table with top 20 terms and top 9 diseases
-  data_selected <- data_plot[rownames(data_plot) %in% selected_terms,top_9]
+  data_selected <- data_plot %>%
+    rownames_to_column("Term") %>%
+    filter(Term %in% selected_terms) %>%
+    dplyr::select(c(1,which(colnames(.) %in% top_9)))
   
-  #plot
+  #calculate distance between terms and diseases
+  dist_r <- dist(data_selected %>% column_to_rownames("Term"))
+  clust_r <- hclust(dist_r)
+  order_r <- clust_r$order
+  
+  dist_c <- dist(t(data_selected %>% column_to_rownames("Term")))
+  clust_c <- hclust(dist_c)
+  order_c <- clust_r$order
+  
+  #plot heatmap of selected terms in top9 diseases
+  data_selected <- melt(data_selected)
+  data_selected$Term <- factor(data_selected$Term,levels = unique(data_selected$Term)[rev(order_r)])
+  data_selected$variable <- factor(data_selected$variable,levels = unique(data_selected$variable)[rev(order_c)])
+  
   filename <- paste0("figures/",classes[i],"_selected_terms.svg")
-  pal <- colorRampPalette(c("white",color[i]))(1000)
-  svg(filename,width = 5,height = 5)
-  heatmap(as.matrix(data_selected[,colSums(data_selected)>0]),
-          col=pal,scale = "none",margins = c(8,15), #margin = c(col,row)
-          cexRow = .6,
-          cexCol = .5)
+  svg(filename,width = 8,height = 5)
+  p <- ggplot(data_selected,aes(x=variable,y=Term,fill=color[i],alpha=value))+
+    geom_tile(show.legend = F)+
+    theme_minimal(base_line_size = .1)+
+    theme(axis.text.x = element_text(angle = 45, hjust = 0,size = 7.5),
+          axis.text.y = element_text(size = 7.5),
+          axis.title.y = element_blank(),
+          axis.title.x = element_blank(),
+          plot.margin=unit(c(t=1,r=4,b=1,l=1),"cm"))+
+    scale_fill_manual(values = color[i])+
+    scale_x_discrete(position = "top")
+  print(p)
   dev.off()
+  
+  # #plot
+  # filename <- paste0("figures/",classes[i],"_selected_terms.svg")
+  # pal <- colorRampPalette(c("white",color[i]))(1000)
+  # svg(filename,width = 5,height = 5)
+  # heatmap(as.matrix(data_selected[,colSums(data_selected)>0]),
+  #         col=pal,scale = "none",margins = c(8,15), #margin = c(col,row)
+  #         cexRow = .6,
+  #         cexCol = .5)
+  # dev.off()
   print(paste0(classes[i]," done"))
 }
 
@@ -165,9 +183,73 @@ all_terms <- unique(unlist(all_terms_list))
 common_selected_terms <- Reduce(intersect,selected_terms_list)
 common_all_terms <- Reduce(intersect,all_terms_list)
 
-# inflammatory_unique_terms <- setdiff(selected_terms_list[[1]],common_terms)
-# psichiatric_unique_terms <- setdiff(selected_terms_list[[2]],common_terms)
-# infectious_unique_terms <- setdiff(selected_terms_list[[3]],common_terms)
+#plot all common terms in top9 diseases in one heatmap
+for (i in 1:3){
+  reactome_results_common_terms <- Reactome_results_all_list[[i]] %>%
+    dplyr::filter(Term %in% common_all_terms) %>%
+    dplyr::select(c(1,which(colnames(.) %in% top_9_list[[i]]))) %>%
+    column_to_rownames("Term")
+  if (i==1){
+    reactome_results_common_terms_all <- reactome_results_common_terms
+  }else{
+    reactome_results_common_terms_all <- cbind(reactome_results_common_terms_all,
+                                               reactome_results_common_terms)
+  }
+}
+
+data_plot <- reactome_results_common_terms_all
+data_plot[is.na(data_plot)] <- 1
+
+#determine distance between terms to plot in dendrogram order
+dist <- dist(data_plot)
+clust <- hclust(dist)
+order <- clust$order
+
+#create melt table to plot in ggplot2
+data_plot <- -log(data_plot)
+data_plot <- data_plot %>%
+  rownames_to_column("Term") %>%
+  melt()
+data_plot$class <- c(rep("inflammatory",288),
+                     rep("psychiatric",288),
+                     rep("infectious",288))
+
+data_plot$Term <- factor(data_plot$Term,levels = data_plot$Term[order])
+
+#plot heatmap with all common terms in top9 diseases of each category
+svg("figures/reactome_common_terms_top9_diseaes.svg",width = 14,height = 7)
+p <- ggplot(data_plot,aes(x=variable,y=Term,fill=class,alpha=value))+
+  geom_tile(show.legend = F)+
+  theme_minimal(base_line_size = .1)+
+  theme(axis.text.x = element_text(angle = 45, hjust = 0,size = 7.5),
+        axis.text.y = element_text(size = 7.5),
+        axis.title.y = element_blank(),
+        axis.title.x = element_blank(),
+        plot.margin=unit(c(t=1,r=4,b=1,l=1),"cm"))+
+  scale_x_discrete(position = "top")+
+  scale_fill_manual(values = c(color[3],color[1],color[2]))
+print(p)
+dev.off()
+
+#plot mostly enriched common terms in top9 diseases in each category
+svg("figures/reactome_selected_common_terms_top9_diseaes.svg",width = 12,height = 5)
+selected_terms <- clust$labels[rev(order)][1:10]
+p <- data_plot %>%
+  filter(Term %in% selected_terms) %>%
+  ggplot(aes(x=variable,y=Term,fill=class,alpha=value))+
+  geom_tile(show.legend = F)+
+  theme_minimal(base_line_size = .1)+
+  theme(axis.text.x = element_text(angle = 45, hjust = 0,size = 7.5),
+        axis.text.y = element_text(size = 7.5),
+        axis.title.y = element_blank(),
+        axis.title.x = element_blank(),
+        plot.margin=unit(c(t=1,r=4,b=1,l=1),"cm"))+
+  scale_x_discrete(position = "top")+
+  scale_fill_manual(values = c(color[3],color[1],color[2]))
+print(p)
+dev.off()
+
+evolution_terms <- selected_terms[c(1,3,4,5,8)]
 
 #perform enrichment for all diseases in each year for the selected terms
 evolution_reactome_list <- list()
@@ -337,7 +419,26 @@ for (i in 1:length(common_all_terms)){
 }  
 dev.off()
 
+#plot evolution of selected common terms for top9 diseases in one image
+evolution_terms <- all_terms[c(which(all_terms %in% evolution_terms),
+                               14,68,101,24,67,34,28,18,6)]
 
+selected_evolution_terms <- evolution_terms[c(1,3,22,5,11,10)]
 
-
+svg("figures/selected_terms_top9_dis_evolution.svg",width = 20,height = 5)
+p <- evolution_reactome_melt %>%
+  filter(dis %in% top_9_all & Term %in% selected_evolution_terms) %>%
+  ggplot(aes(x=year,y=dis,fill=class,alpha=value))+
+  geom_tile(show.legend = F)+
+  theme_minimal(base_line_size = .2)+
+  theme(axis.title.y = element_blank(),
+        #axis.text.y = element_blank(),
+        axis.text.x = element_blank()
+        )+
+  scale_x_discrete(limits = c(1990,2000,2010,2018),name="Year (1990-2018)")+
+  facet_grid(rows = vars(class),cols = vars(Term), scales = "free", space = "free")+
+  scale_fill_manual(values = c(color[3],color[1],color[2]))+
+  theme(strip.text = element_text(size = 8))
+print(p)
+dev.off()
 
