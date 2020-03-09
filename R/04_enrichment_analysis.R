@@ -442,6 +442,25 @@ p <- evolution_reactome_melt %>%
 print(p)
 dev.off()
 
+#plot only legend of each disease class heatmap
+for (i in 1:3){
+  file <- paste0("figures/legend_",i,".svg")
+  svg(filename = file,
+      width = 1,height = 1.7)
+  
+  p<- evolution_reactome_melt %>%
+    filter(dis %in% top_9_all & 
+             Term %in% selected_evolution_terms) %>%
+    ggplot(aes(x=1,y=value,color=value))+
+    geom_point()+
+    scale_y_discrete(limits=c(0,max(x$value)))+
+    scale_color_gradient(low="white",
+                         high=color[i])
+  legend <- get_legend(p)
+  plot(legend)
+  dev.off()
+}  
+
 #calculate the percentage of diseases enriched for each selected term
 #in each year (separated by category of disease)
 for (i in 1:3){
@@ -511,3 +530,47 @@ p<-ggplot(nsig_all_years_all_absolute,aes(x=variable,y=value,color=class))+
   theme_minimal()
 print(p)
 dev.off()
+
+#plot all terms in top9 dis evolution (similar to Fig. 2)
+svg("figures/all_terms_top9_dis_evolution.svg",width = 100,height = 5)
+p <- evolution_reactome_melt %>%
+  filter(dis %in% top_9_all & Term %in% common_all_terms) %>%
+  ggplot(aes(x=year,y=dis,fill=class,alpha=log2(value)))+
+  geom_tile(show.legend = F)+
+  theme_minimal(base_line_size = .2)+
+  theme(axis.title.y = element_blank(),
+        #axis.text.y = element_blank(),
+        axis.text.x = element_blank()
+  )+
+  scale_x_discrete(limits = c(1990,2000,2010,2018),name="Year (1990-2018)")+
+  facet_grid(rows = vars(class),cols = vars(Term), scales = "free", space = "free")+
+  scale_fill_manual(values = c(color[3],color[1],color[2]))+
+  theme(strip.text = element_text(size = 8))
+print(p)
+dev.off()
+
+#plot all terms in top9 dis evolution in groups of 4
+intervals <- list(c(1:4),c(5:8),c(9:12),c(13:16),
+               c(17:20),c(21:24),c(25:28),c(29:32))
+
+for (i in 1:8){
+  file <- paste0("figures/all_terms_top9_dis_evolution_",i,".svg")
+  int <- intervals[[i]]
+  svg(file,width = 12,height = 5)
+  terms <- common_all_terms[int]
+  p <- evolution_reactome_melt %>%
+    filter(dis %in% top_9_all & Term %in% terms) %>%
+    ggplot(aes(x=year,y=dis,fill=class,alpha=value))+
+    geom_tile(show.legend = F)+
+    theme_minimal(base_line_size = .2)+
+    theme(axis.title.y = element_blank(),
+          #axis.text.y = element_blank(),
+          axis.text.x = element_blank()
+    )+
+    scale_x_discrete(limits = c(1990,2000,2010,2018),name="Year (1990-2018)")+
+    facet_grid(rows = vars(class),cols = vars(Term), scales = "free", space = "free")+
+    scale_fill_manual(values = c(color[3],color[1],color[2]))+
+    theme(strip.text = element_text(size = 8))
+  print(p)
+  dev.off()
+}  
