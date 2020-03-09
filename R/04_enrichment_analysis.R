@@ -405,7 +405,7 @@ for (i in 1:length(common_all_terms)){
   p<-evolution_reactome_melt %>%
     filter(Term==term & dis %in% top_9_all) %>%
     ggplot(aes(x=year,y=dis,fill=class,alpha=log(value+1)))+
-    geom_tile(show.legend = F)+
+    geom_tile(show.legend = T)+
     theme_minimal(base_line_size = .1)+
     theme(axis.title.y = element_blank(),
           #axis.text.y = element_blank(),
@@ -416,7 +416,7 @@ for (i in 1:length(common_all_terms)){
     scale_fill_manual(values = c(color[3],color[1],color[2]))+
     theme(strip.text = element_text(size = 8))
   print(p)
-}  
+}
 dev.off()
 
 #plot evolution of selected common terms for top9 diseases in one image
@@ -532,7 +532,7 @@ print(p)
 dev.off()
 
 #plot all terms in top9 dis evolution (similar to Fig. 2)
-svg("figures/all_terms_top9_dis_evolution.svg",width = 100,height = 5)
+svg("figures/all_common_terms_top9_dis_evolution.svg",width = 100,height = 5)
 p <- evolution_reactome_melt %>%
   filter(dis %in% top_9_all & Term %in% common_all_terms) %>%
   ggplot(aes(x=year,y=dis,fill=class,alpha=log2(value)))+
@@ -554,7 +554,7 @@ intervals <- list(c(1:4),c(5:8),c(9:12),c(13:16),
                c(17:20),c(21:24),c(25:28),c(29:32))
 
 for (i in 1:8){
-  file <- paste0("figures/all_terms_top9_dis_evolution_",i,".svg")
+  file <- paste0("figures/all_common_terms_top9_dis_evolution_",i,".svg")
   int <- intervals[[i]]
   svg(file,width = 12,height = 5)
   terms <- common_all_terms[int]
