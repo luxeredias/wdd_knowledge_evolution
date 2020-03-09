@@ -356,6 +356,8 @@ evolution_reactome_melt_2$class <- ifelse(evolution_reactome_melt_2$dis %in% inf
 top_9_all <- unlist(top_9_list)
 evolution_reactome_melt <- evolution_reactome_melt_2
 
+write.csv(evolution_reactome_melt,file="data/evolution_reactome_melt.csv",row.names = F)
+
 #plot evolution of all terms for all diseases
 pdf("figures/all_terms_evolution.pdf")
 for (i in 1:length(unique(evolution_reactome_melt$Term))){
