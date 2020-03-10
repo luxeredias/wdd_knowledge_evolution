@@ -7,6 +7,7 @@ library(igraph)
 library(tibble)
 library(clusterProfiler)
 library(ggplot2)
+library(reshape2)
 options(stringsAsFactors = F)
 
 #set working directory
@@ -94,7 +95,7 @@ for (i in 1:3){
 common_hubs <- intersect(intersect(hubs[[1]],hubs[[2]]),hubs[[3]])
 venn.diagram(x = hubs,
              category.names = classes,
-             filename = "figures/common_hubs.svg",imagetype = "svg",
+             filename = "figures/common_hubs_venn.svg",imagetype = "svg",
              output=T,resolution = 300,force.unique = T,height = 10,width = 10,
              
              # Circles
@@ -121,3 +122,56 @@ all_genes_edges <- all_genes %>%
   select(c(1,3,2))
 
 write.csv(all_genes_edges,"data/all_genes_degrees.csv",row.names = F)
+
+#plot number of diseases connected to common hubs from 1990 to 2018
+for (i in 1:3){
+  ndis_year_hubs <- edges_list[[i]] %>%
+    filter(Source %in% common_hubs) %>%
+    melt(id.vars=c("Source","Target")) %>%
+    mutate(is.present=ifelse(value>0,1,0),
+           variable=as.numeric(as.character(substr(variable,5,8)))) %>%
+    group_by(Source,variable) %>%
+    summarise(ndis=sum(is.present)) %>%
+    mutate(class=classes[i])
+    
+  if (i==1){
+    ndis_year_hubs_all <- ndis_year_hubs
+  }else{
+    ndis_year_hubs_all <- rbind(ndis_year_hubs_all,ndis_year_hubs)
+  }
+}
+
+ndis_year_hubs_all$total_dis <- c(rep(27,203),rep(9,203),rep(63,203))
+ndis_year_hubs_all$percent <- ndis_year_hubs_all$ndis/ndis_year_hubs_all$total_dis*100
+ndis_year_hubs_all$class <- factor(ndis_year_hubs_all$class,levels = classes)
+
+#plot evolution of selected common hub genes
+selected_hubs_to_plot <- c("TNF","IL6","IL8","NF-KB")
+for (i in 1:length(selected_hubs_to_plot)){
+  gene <- selected_hubs_to_plot[i]
+  filename <- paste0("figures/hub_evolution_",gene,".svg")
+  svg(filename,height = 2,width = 5)
+  p <- ndis_year_hubs_all %>%
+    filter(Source == gene) %>%
+    ggplot(aes(x=variable,y=percent,color=class))+
+      scale_color_manual(values = color)+
+      geom_line(size=1)+
+      ylim(0,100)+
+      scale_x_discrete(limits=c(1990,2000,2010,2018))+
+      #scale_y_discrete(limits=c(0,25,50,75,100))+
+      theme_minimal()
+  print(p)
+  dev.off()
+}
+
+#plot hub evolution for all common hub genes
+svg("figures/hub_evolution_all.svg",height = 6,width = 15)
+p <- ggplot(ndis_year_hubs_all,aes(x=variable,y=percent,color=class))+
+  scale_color_manual(values = color)+
+  geom_line(size=1)+
+  ylim(0,100)+
+  scale_x_discrete(limits=c(1990,2000,2010,2018))+
+  facet_wrap(facets = "Source",scales = "fixed")+
+  theme_minimal()
+print(p)
+dev.off()
