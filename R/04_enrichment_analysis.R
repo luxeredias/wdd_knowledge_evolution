@@ -177,6 +177,7 @@ for (i in 1:3){
   print(paste0(classes[i]," done"))
 }
 
+save(top_9_list,file="data/top_9_list.RData")
 all_selected_terms <- unique(unlist(selected_terms_list))
 all_terms <- unique(unlist(all_terms_list))
 
