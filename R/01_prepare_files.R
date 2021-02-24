@@ -90,3 +90,4 @@ all_nodes$Dis_class <- c(rep(" ",3723),rep("INFLAMMATORY",27),rep("INFECTIOUS",6
 save(diseases,file = "data/diseases.RData")
 write.csv(all_edges,"data/all_edges.csv",quote = F,row.names = F)
 write.csv(all_nodes,"data/all_nodes.csv",quote = F,row.names = F)
+

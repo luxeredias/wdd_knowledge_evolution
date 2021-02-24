@@ -5,6 +5,7 @@
 library(dplyr)
 library(reshape2)
 library(ggplot2)
+library(ggridges)
 
 #set working directory
 dir <- "~/Área de Trabalho/GitHub_projects/wdd_knowledge_evolution/"
@@ -42,8 +43,8 @@ for (i in 1:length(diseases$disease)){
     year <- as.numeric(gsub(x = cols[j],pattern = "Doc.",replacement = ""))
     col <- which(colnames(all_edges)==cols[j])
     genes <- df %>%
-      select(1,2,col) %>%
-      rename(docs=3) %>%
+      dplyr::select(1,2,col) %>%
+      dplyr::rename(docs=3) %>%
       filter(docs > 0) %>%
       pull(Source) %>%
       unique() %>%
@@ -85,8 +86,8 @@ for (i in 1:3){
     year <- as.numeric(gsub(x = cols[j],pattern = "Doc.",replacement = ""))
     col <- which(colnames(df_class)==cols[j])
     genes <- df_class %>%
-      select(1,2,col) %>%
-      rename(docs=3) %>%
+      dplyr::select(1,2,col) %>%
+      dplyr::rename(docs=3) %>%
       filter(docs > 0) %>%
       pull(Source) %>%
       unique() %>%
@@ -167,10 +168,12 @@ gene_variation_melt$dis_class <- c(rep("inflammatory",27),
                                rep("psychiatric",9),
                                rep("infectious",63))
 
+save(gene_variation_melt,file = "data/gene_variation_melt.RData")
+
 #####plot the yearly variation of genes in each class#####
 genes_each_year_dis_class <- gene_variation_melt %>%
-  group_by(dis_class,variable) %>%
-  summarise(sum=sum(value))
+  dplyr::group_by(dis_class,variable) %>%
+  dplyr::summarise(sum=sum(value))
 genes_each_year_dis_class$variable <- as.numeric(as.character(genes_each_year_dis_class$variable))
 #remove the year 2018. Searches were made June-August of 2018 so data for
 #the year is incomplete
@@ -197,7 +200,7 @@ ggplot(genes_each_year_dis_class,aes(x=variable,y=dis_class,fill=dis_class,color
   theme(legend.position = 'none')
 dev.off()
 
-#####plot the yearly variation of genes in all and selected diseases#####
+#####plot the yearly variation of genes in all and dplyr::selected diseases#####
 #all diseases by class (separate files)
 dis_classes <- c("infectious","inflammatory","psychiatric")
 for (i in 1:3){
