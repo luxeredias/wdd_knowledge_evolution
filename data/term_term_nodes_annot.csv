@@ -1,0 +1,416 @@
+node,mod,degree,annot
+neuronal system,1,1926.25957709364,Neurotransmission
+transmission across chemical synapses,1,1832.9493873028,Neurotransmission
+activation of nmda receptors and postsynaptic events,1,1440.44218872164,Neurotransmission
+neurotransmitter receptors and postsynaptic signal transmission,1,1426.40194631478,Neurotransmission
+creb1 phosphorylation through nmda receptor mediated activation of ras signaling,1,1170.79316730228,Neurotransmission
+long term potentiation,1,1062.97136598253,Neurotransmission
+unblocking of nmda receptors glutamate binding and activation,1,976.956803770914,Neurotransmission
+assembly and cell surface presentation of nmda receptors,1,832.216859778356,Neurotransmission
+protein protein interactions at synapses,1,824.911183016203,Neurotransmission
+neurexins and neuroligins,1,659.411014340407,Neurotransmission
+neurotransmitter release cycle,1,434.896959103261,Neurotransmission
+negative regulation of nmda receptor mediated neuronal transmission,1,394.357074094367,Neurotransmission
+synaptic adhesion like molecules,1,349.555826299767,Neurotransmission
+ras activation upon ca2 influx through nmda receptor,1,317.857278460879,Neurotransmission
+transcriptional regulation by mecp2,1,282.322801713651,Neurotransmission
+trafficking of ampa receptors,1,222.392458924599,Neurotransmission
+mecp2 regulates neuronal receptors and channels,1,166.978810555707,Neurotransmission
+glutamate neurotransmitter release cycle,1,100.695860215605,Neurotransmission
+activation of kainate receptors upon glutamate binding,1,98.7258360392217,Neurotransmission
+ionotropic activity of kainate receptors,1,92.7922406072544,Neurotransmission
+gaba synthesis release reuptake and degradation,1,91.5762204499239,Neurotransmission
+dopamine neurotransmitter release cycle,1,82.3543703489768,Neurotransmission
+serotonin neurotransmitter release cycle,1,82.3543703489768,Neurotransmission
+norepinephrine neurotransmitter release cycle,1,72.5911808512848,Neurotransmission
+neurotransmitter clearance,1,42.5404493953897,Neurotransmission
+neurotoxicity of clostridium toxins,1,32.140413630471,Neurotransmission
+na cl dependent neurotransmitter transporters,1,15.1917546370228,Neurotransmission
+programmed cell death,2,1541.47703570551,"Cell fate: apoptosis, senesence, differentiation"
+pten regulation,2,1414.51592580431,"Cell fate: apoptosis, senesence, differentiation"
+cellular senescence,2,1375.73948209382,"Cell fate: apoptosis, senesence, differentiation"
+transcriptional regulation by runx3,2,1237.37101335094,"Cell fate: apoptosis, senesence, differentiation"
+oxidative stress induced senescence,2,1144.79122826211,"Cell fate: apoptosis, senesence, differentiation"
+transcriptional regulation by runx2,2,1143.6676114982,"Cell fate: apoptosis, senesence, differentiation"
+senescence associated secretory phenotype sasp ,2,1129.09105717639,"Cell fate: apoptosis, senesence, differentiation"
+transcriptional regulation by tp53,2,1089.5595616811,"Cell fate: apoptosis, senesence, differentiation"
+mitotic g1 phase and g1 s transition,2,961.297707386222,"Cell fate: apoptosis, senesence, differentiation"
+mapk6 mapk4 signaling,2,835.869398219186,"Cell fate: apoptosis, senesence, differentiation"
+deubiquitination,2,785.181511396091,"Cell fate: apoptosis, senesence, differentiation"
+oncogene induced senescence,2,761.707462595253,"Cell fate: apoptosis, senesence, differentiation"
+transcriptional regulation by runx1,2,688.768506674316,"Cell fate: apoptosis, senesence, differentiation"
+tnfr2 non canonical nf kb pathway,2,677.188213009338,"Cell fate: apoptosis, senesence, differentiation"
+ripk1 mediated regulated necrosis,2,673.694889670409,"Cell fate: apoptosis, senesence, differentiation"
+ub specific processing proteases,2,647.049313597881,"Cell fate: apoptosis, senesence, differentiation"
+caspase activation via death receptors in the presence of ligand,2,627.050581713505,"Cell fate: apoptosis, senesence, differentiation"
+caspase activation via extrinsic apoptotic signalling pathway,2,618.27847915811,"Cell fate: apoptosis, senesence, differentiation"
+regulation of pten gene transcription,2,614.771216892887,"Cell fate: apoptosis, senesence, differentiation"
+regulation by c flip,2,548.966201677585,"Cell fate: apoptosis, senesence, differentiation"
+intrinsic pathway for apoptosis,2,526.914839834885,"Cell fate: apoptosis, senesence, differentiation"
+mapk targets nuclear events mediated by map kinases,2,517.388002960877,"Cell fate: apoptosis, senesence, differentiation"
+runx2 regulates bone development,2,477.70772671269,"Cell fate: apoptosis, senesence, differentiation"
+cyclin d associated events in g1,2,466.679693728219,"Cell fate: apoptosis, senesence, differentiation"
+runx2 regulates osteoblast differentiation,2,456.266748538765,"Cell fate: apoptosis, senesence, differentiation"
+activation of the ap 1 family of transcription factors,2,447.849271062513,"Cell fate: apoptosis, senesence, differentiation"
+regulation of tp53 expression and degradation,2,432.575597919165,"Cell fate: apoptosis, senesence, differentiation"
+response of mtb to phagocytosis,2,417.493752569038,"Cell fate: apoptosis, senesence, differentiation"
+regulation of mrna stability by proteins that bind au rich elements,2,415.322746172935,"Cell fate: apoptosis, senesence, differentiation"
+cyclin a cdk2 associated events at s phase entry,2,408.335467234747,"Cell fate: apoptosis, senesence, differentiation"
+g1 s dna damage checkpoints,2,374.968740208337,"Cell fate: apoptosis, senesence, differentiation"
+infection with mycobacterium tuberculosis,2,365.503711804675,"Cell fate: apoptosis, senesence, differentiation"
+sumoylation,2,359.112966836636,"Cell fate: apoptosis, senesence, differentiation"
+spry regulation of fgf signaling,2,350.038953016286,"Cell fate: apoptosis, senesence, differentiation"
+regulation of runx3 expression and activity,2,312.073662243677,"Cell fate: apoptosis, senesence, differentiation"
+tp53 regulates transcription of cell cycle genes,2,308.050238279798,"Cell fate: apoptosis, senesence, differentiation"
+tp53 regulates transcription of dna repair genes,2,250.090120985307,"Cell fate: apoptosis, senesence, differentiation"
+regulation of runx2 expression and activity,2,237.553557735761,"Cell fate: apoptosis, senesence, differentiation"
+tp53 regulates metabolic genes,2,201.302269991524,"Cell fate: apoptosis, senesence, differentiation"
+tnfs bind their physiological receptors,2,185.557264681521,"Cell fate: apoptosis, senesence, differentiation"
+regulation of tp53 activity,2,180.612739317241,"Cell fate: apoptosis, senesence, differentiation"
+apoptotic factor mediated response,2,177.855177782283,"Cell fate: apoptosis, senesence, differentiation"
+cytochrome c mediated apoptotic response,2,172.511462437994,"Cell fate: apoptosis, senesence, differentiation"
+transcriptional regulation by ventx,2,171.432294052699,"Cell fate: apoptosis, senesence, differentiation"
+tp53 regulates transcription of cell death genes,2,160.305950414787,"Cell fate: apoptosis, senesence, differentiation"
+apoptotic execution phase,2,153.842648942692,"Cell fate: apoptosis, senesence, differentiation"
+tp53 regulates transcription of genes involved in g1 cell cycle arrest,2,133.804395778596,"Cell fate: apoptosis, senesence, differentiation"
+aberrant regulation of mitotic g1 s transition in cancer due to rb1 defects,2,131.705364458963,"Cell fate: apoptosis, senesence, differentiation"
+sumoylation of intracellular receptors,2,123.083611290764,"Cell fate: apoptosis, senesence, differentiation"
+regulation of tp53 activity through methylation,2,98.9918668329371,"Cell fate: apoptosis, senesence, differentiation"
+nuclear receptor transcription pathway,2,85.6063240277586,"Cell fate: apoptosis, senesence, differentiation"
+tnf receptor superfamily tnfsf members mediating non canonical nf kb pathway,2,84.8841060738169,"Cell fate: apoptosis, senesence, differentiation"
+sumoylation of transcription factors,2,80.9640666928315,"Cell fate: apoptosis, senesence, differentiation"
+apoptotic cleavage of cellular proteins,2,73.6348454508556,"Cell fate: apoptosis, senesence, differentiation"
+tp53 regulates transcription of death receptors and ligands,2,73.6030936433308,"Cell fate: apoptosis, senesence, differentiation"
+diseases of programmed cell death,2,60.6442167382119,"Cell fate: apoptosis, senesence, differentiation"
+mtor signalling,2,59.4376803765806,"Cell fate: apoptosis, senesence, differentiation"
+tp53 regulates transcription of caspase activators and caspases,2,48.7893394670864,"Cell fate: apoptosis, senesence, differentiation"
+suppression of phagosomal maturation,2,43.3496909061804,"Cell fate: apoptosis, senesence, differentiation"
+caspase mediated cleavage of cytoskeletal proteins,2,41.6931510878083,"Cell fate: apoptosis, senesence, differentiation"
+detoxification of reactive oxygen species,2,33.9686211458099,"Cell fate: apoptosis, senesence, differentiation"
+deadenylation dependent mrna decay,2,33.2107408550794,"Cell fate: apoptosis, senesence, differentiation"
+runx1 and foxp3 control the development of regulatory t lymphocytes tregs ,2,25.7145543951586,"Cell fate: apoptosis, senesence, differentiation"
+apoptotic cleavage of cell adhesion proteins,2,22.1211834789101,"Cell fate: apoptosis, senesence, differentiation"
+apoptosis induced dna fragmentation,2,18.7214998008063,"Cell fate: apoptosis, senesence, differentiation"
+runx3 regulates p14 arf,2,18.1935142801236,"Cell fate: apoptosis, senesence, differentiation"
+gpcr ligand binding,3,2511.85614612588,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+class a 1 rhodopsin like receptors ,3,2339.94239711695,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+peptide ligand binding receptors,3,1809.55535721361,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+g alpha i signalling events,3,1209.96701608992,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+leishmania infection,3,1134.47515010397,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+chemokine receptors bind chemokines,3,935.660292318786,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+adora2b mediated anti inflammatory cytokines production,3,858.988490076573,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+anti inflammatory response favouring leishmania parasite infection,3,784.728079931619,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+g alpha q signalling events,3,419.669459917734,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+class b 2 secretin family receptors ,3,373.042473864526,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+amine ligand binding receptors,3,353.098936185071,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+peptide hormone metabolism,3,218.686645347751,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+serotonin receptors,3,205.208973556492,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+synthesis secretion and deacylation of ghrelin,3,102.156611138782,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+signaling by wnt,3,102.070812748787,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+incretin synthesis secretion and inactivation,3,59.026256219882,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+wnt ligand biogenesis and trafficking,3,51.7055985458086,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+metabolism of angiotensinogen to angiotensins,3,32.9227067298962,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+synthesis secretion and inactivation of glucagon like peptide 1 glp 1 ,3,28.5847400850164,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+disassembly of the destruction complex and recruitment of axin to the membrane,3,26.649878408999,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+negative regulation of tcf dependent signaling by wnt ligand antagonists,3,22.871609844283,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+killing mechanisms,3,21.0528750837919,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+class c 3 metabotropic glutamate pheromone receptors ,3,4.74161948530373,"GPCR signaling: Wnt, metabotropic receptors, cytokine receptors"
+diseases of signal transduction by growth factor receptors and second messengers,4,3667.18165133322,Signal transduction upon growth factor stimulation
+intracellular signaling by second messengers,4,3295.09091719927,Signal transduction upon growth factor stimulation
+mapk family signaling cascades,4,2629.06298850746,Signal transduction upon growth factor stimulation
+pi3k akt signaling in cancer,4,2252.05129562883,Signal transduction upon growth factor stimulation
+flt3 signaling,4,2211.09047295881,Signal transduction upon growth factor stimulation
+negative regulation of the pi3k akt network,4,2094.0540896677,Signal transduction upon growth factor stimulation
+esr mediated signaling,4,1854.80190044261,Signal transduction upon growth factor stimulation
+signaling by nuclear receptors,4,1714.37652742587,Signal transduction upon growth factor stimulation
+constitutive signaling by aberrant pi3k in cancer,4,1709.01441701027,Signal transduction upon growth factor stimulation
+extra nuclear estrogen signaling,4,1415.108785527,Signal transduction upon growth factor stimulation
+signaling by erbb4,4,1346.37606450948,Signal transduction upon growth factor stimulation
+downregulation of erbb2 signaling,4,1192.21807050031,Signal transduction upon growth factor stimulation
+estrogen dependent nuclear events downstream of esr membrane signaling,4,1162.14014937919,Signal transduction upon growth factor stimulation
+signaling by erbb2,4,1145.26531203989,Signal transduction upon growth factor stimulation
+signaling by ptk6,4,1109.35299892739,Signal transduction upon growth factor stimulation
+nuclear signaling by erbb4,4,961.646646041596,Signal transduction upon growth factor stimulation
+estrogen dependent gene expression,4,721.413569504742,Signal transduction upon growth factor stimulation
+nuclear events kinase and transcription factor activation ,4,703.770185572341,Signal transduction upon growth factor stimulation
+signaling by ntrks,4,700.034756160632,Signal transduction upon growth factor stimulation
+costimulation by the cd28 family,4,623.004492271189,Signal transduction upon growth factor stimulation
+signalling to erks,4,583.799292744931,Signal transduction upon growth factor stimulation
+cd28 co stimulation,4,552.597144142123,Signal transduction upon growth factor stimulation
+signal transduction by l1,4,524.12882412406,Signal transduction upon growth factor stimulation
+constitutive signaling by akt1 e17k in cancer,4,507.439033325305,Signal transduction upon growth factor stimulation
+signaling by vegf,4,432.489836788667,Signal transduction upon growth factor stimulation
+rho gtpases activate nadph oxidases,4,425.204125248758,Signal transduction upon growth factor stimulation
+vegfr2 mediated vascular permeability,4,398.140665403596,Signal transduction upon growth factor stimulation
+erbb2 activates ptk6 signaling,4,396.621018806019,Signal transduction upon growth factor stimulation
+erbb2 regulates cell motility,4,396.621018806019,Signal transduction upon growth factor stimulation
+pi3k events in erbb2 signaling,4,396.621018806019,Signal transduction upon growth factor stimulation
+shc1 events in erbb2 signaling,4,396.621018806019,Signal transduction upon growth factor stimulation
+signaling by erbb2 in cancer,4,396.621018806019,Signal transduction upon growth factor stimulation
+transcriptional regulation by the ap 2 tfap2 family of transcription factors,4,368.33991322197,Signal transduction upon growth factor stimulation
+l1cam interactions,4,365.979649741181,Signal transduction upon growth factor stimulation
+negative regulation of mapk pathway,4,363.994566681669,Signal transduction upon growth factor stimulation
+grb2 events in erbb2 signaling,4,355.788223265805,Signal transduction upon growth factor stimulation
+gastrin creb signalling pathway via pkc and mapk,4,333.699103638858,Signal transduction upon growth factor stimulation
+map2k and mapk activation,4,328.123018033085,Signal transduction upon growth factor stimulation
+negative regulation of fgfr3 signaling,4,308.309481323454,Signal transduction upon growth factor stimulation
+negative regulation of fgfr4 signaling,4,308.309481323454,Signal transduction upon growth factor stimulation
+signaling by fgfr3,4,308.309481323454,Signal transduction upon growth factor stimulation
+signaling by fgfr4,4,308.309481323454,Signal transduction upon growth factor stimulation
+ngf stimulated transcription,4,301.426081054505,Signal transduction upon growth factor stimulation
+signaling by moderate kinase activity braf mutants,4,298.047393344966,Signal transduction upon growth factor stimulation
+signaling by egfr in cancer,4,280.341575896173,Signal transduction upon growth factor stimulation
+cargo recognition for clathrin mediated endocytosis,4,271.043968885087,Signal transduction upon growth factor stimulation
+pd 1 signaling,4,270.019188003763,Signal transduction upon growth factor stimulation
+negative regulation of fgfr2 signaling,4,266.918919103255,Signal transduction upon growth factor stimulation
+negative regulation of fgfr1 signaling,4,258.608092372269,Signal transduction upon growth factor stimulation
+pi3k events in erbb4 signaling,4,231.20841343522,Signal transduction upon growth factor stimulation
+shc1 events in erbb4 signaling,4,231.20841343522,Signal transduction upon growth factor stimulation
+generation of second messenger molecules,4,223.6686499048,Signal transduction upon growth factor stimulation
+clathrin mediated endocytosis,4,220.806083764516,Signal transduction upon growth factor stimulation
+constitutive signaling by ligand responsive egfr cancer variants,4,216.982776744139,Signal transduction upon growth factor stimulation
+ncam signaling for neurite out growth,4,210.095239401586,Signal transduction upon growth factor stimulation
+signal attenuation,4,198.847875325764,Signal transduction upon growth factor stimulation
+signaling by fgfr1,4,196.249624336988,Signal transduction upon growth factor stimulation
+gab1 signalosome,4,193.421429456681,Signal transduction upon growth factor stimulation
+prolonged erk activation events,4,188.679221345043,Signal transduction upon growth factor stimulation
+cd28 dependent vav1 pathway,4,188.490125423185,Signal transduction upon growth factor stimulation
+shc1 events in egfr signaling,4,184.973344572004,Signal transduction upon growth factor stimulation
+downregulation of erbb2 erbb3 signaling,4,184.59956701794,Signal transduction upon growth factor stimulation
+signaling by erbb2 ecd mutants,4,132.693595098994,Signal transduction upon growth factor stimulation
+cd28 dependent pi3k akt signaling,4,132.15643941074,Signal transduction upon growth factor stimulation
+akt phosphorylates targets in the cytosol,4,118.317954204325,Signal transduction upon growth factor stimulation
+tfap2 ap 2 family regulates transcription of growth factors and their receptors,4,113.951803593513,Signal transduction upon growth factor stimulation
+constitutive signaling by egfrviii,4,109.442162648644,Signal transduction upon growth factor stimulation
+constitutive signaling by overexpressed erbb2,4,100.622188088343,Signal transduction upon growth factor stimulation
+signaling by ntrk2 trkb ,4,100.358692725117,Signal transduction upon growth factor stimulation
+semaphorin interactions,4,94.7241159331448,Signal transduction upon growth factor stimulation
+akt phosphorylates targets in the nucleus,4,72.7704631223213,Signal transduction upon growth factor stimulation
+dcc mediated attractive signaling,4,59.0479135626555,Signal transduction upon growth factor stimulation
+frs mediated fgfr1 signaling,4,53.9926852740455,Signal transduction upon growth factor stimulation
+ctla4 inhibitory signaling,4,49.8917292007839,Signal transduction upon growth factor stimulation
+enos activation,4,42.7351475160138,Signal transduction upon growth factor stimulation
+tetrahydrobiopterin bh4 synthesis recycling salvage and regulation,4,40.9578478035137,Signal transduction upon growth factor stimulation
+crmps in sema3a signaling,4,33.9943078806944,Signal transduction upon growth factor stimulation
+ptk6 regulates rho gtpases ras gtpase and map kinases,4,30.2040287468406,Signal transduction upon growth factor stimulation
+metabolism of cofactors,4,25.6883400316884,Signal transduction upon growth factor stimulation
+met activates ras signaling,4,22.6364794351895,Signal transduction upon growth factor stimulation
+activated ntrk2 signals through frs2 and frs3,4,20.5448928864179,Signal transduction upon growth factor stimulation
+metabolism of nitric oxide nos3 activation and regulation,4,9.74476541704934,Signal transduction upon growth factor stimulation
+cellular response to heat stress,5,806.979076946501,"Response to stress: autophagy, mitophagy, heatshock response"
+regulation of hsf1 mediated heat shock response,5,612.970780135102,"Response to stress: autophagy, mitophagy, heatshock response"
+autophagy,5,546.286384410969,"Response to stress: autophagy, mitophagy, heatshock response"
+selective autophagy,5,509.922349066477,"Response to stress: autophagy, mitophagy, heatshock response"
+hsf1 dependent transactivation,5,457.550051719677,"Response to stress: autophagy, mitophagy, heatshock response"
+attenuation phase,5,450.912652872186,"Response to stress: autophagy, mitophagy, heatshock response"
+hsf1 activation,5,371.568823824788,"Response to stress: autophagy, mitophagy, heatshock response"
+mitophagy,5,266.394589038699,"Response to stress: autophagy, mitophagy, heatshock response"
+chaperone mediated autophagy,5,225.719191699619,"Response to stress: autophagy, mitophagy, heatshock response"
+pink1 prkn mediated mitophagy,5,108.210915208384,"Response to stress: autophagy, mitophagy, heatshock response"
+pexophagy,5,74.654707466427,"Response to stress: autophagy, mitophagy, heatshock response"
+receptor mediated mitophagy,5,45.6950074256696,"Response to stress: autophagy, mitophagy, heatshock response"
+josephin domain dubs,5,28.8381007770438,"Response to stress: autophagy, mitophagy, heatshock response"
+perk regulates gene expression,6,101.265063886899,Unfolded protein response (UPR)
+unfolded protein response upr ,6,93.1530541872968,Unfolded protein response (UPR)
+atf4 activates genes in response to endoplasmic reticulum stress,6,34.2411289311813,Unfolded protein response (UPR)
+atf6 atf6 alpha activates chaperone genes,6,13.5396033122569,Unfolded protein response (UPR)
+hiv infection,7,661.590438867859,Response against viruses via TGF-SMAD signaling
+host interactions of hiv factors,7,514.427957176179,Response against viruses via TGF-SMAD signaling
+hiv life cycle,7,454.877752478229,Response against viruses via TGF-SMAD signaling
+signaling by tgf beta receptor complex,7,357.756595336483,Response against viruses via TGF-SMAD signaling
+signaling by tgfb family members,7,156.19875979762,Response against viruses via TGF-SMAD signaling
+the role of nef in hiv 1 replication and disease pathogenesis,7,115.869134127733,Response against viruses via TGF-SMAD signaling
+early phase of hiv life cycle,7,68.868721264897,Response against viruses via TGF-SMAD signaling
+budding and maturation of hiv virion,7,56.1893323490602,Response against viruses via TGF-SMAD signaling
+transcriptional activity of smad2 smad3 smad4 heterotrimer,7,53.8983553759651,Response against viruses via TGF-SMAD signaling
+downregulation of tgf beta receptor signaling,7,50.6372878748954,Response against viruses via TGF-SMAD signaling
+tgf beta receptor signaling activates smads,7,50.6372878748954,Response against viruses via TGF-SMAD signaling
+smad2 smad3 smad4 heterotrimer regulates transcription,7,43.6681729310446,Response against viruses via TGF-SMAD signaling
+signaling by interleukins,8,3346.04590183746,Interferon stimulated genes: interleukins and antigen presentation
+interferon signaling,8,1082.73002525488,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 12 family signaling,8,836.384674978726,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 4 and interleukin 13 signaling,8,784.328643085074,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 6 signaling,8,693.819979140079,Interferon stimulated genes: interleukins and antigen presentation
+interferon gamma signaling,8,674.617728510541,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 6 family signaling,8,664.333314757828,Interferon stimulated genes: interleukins and antigen presentation
+interferon alpha beta signaling,8,656.093518437522,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 35 signalling,8,590.850840972893,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 12 signaling,8,579.632991595057,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 20 family signaling,8,573.169617314658,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 27 signaling,8,553.849271888639,Interferon stimulated genes: interleukins and antigen presentation
+growth hormone receptor signaling,8,533.91824574864,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 2 family signaling,8,528.901834780704,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 10 signaling,8,483.564368324833,Interferon stimulated genes: interleukins and antigen presentation
+regulation of ifna signaling,8,424.393935278794,Interferon stimulated genes: interleukins and antigen presentation
+antiviral mechanism by ifn stimulated genes,8,365.54129931255,Interferon stimulated genes: interleukins and antigen presentation
+gene and protein expression by jak stat signaling after interleukin 12 stimulation,8,356.705850324653,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 3 interleukin 5 and gm csf signaling,8,312.227813237804,Interferon stimulated genes: interleukins and antigen presentation
+potential therapeutics for sars,8,279.703466070367,Interferon stimulated genes: interleukins and antigen presentation
+antigen presentation folding assembly and peptide loading of class i mhc,8,263.789316477799,Interferon stimulated genes: interleukins and antigen presentation
+raf independent mapk1 3 activation,8,247.46636333108,Interferon stimulated genes: interleukins and antigen presentation
+class i mhc mediated antigen processing presentation,8,216.577528727442,Interferon stimulated genes: interleukins and antigen presentation
+dap12 interactions,8,212.807529908634,Interferon stimulated genes: interleukins and antigen presentation
+sars cov infections,8,184.840338270592,Interferon stimulated genes: interleukins and antigen presentation
+mapk3 erk1 activation,8,166.677586274893,Interferon stimulated genes: interleukins and antigen presentation
+immunoregulatory interactions between a lymphoid and a non lymphoid cell,8,161.460687362831,Interferon stimulated genes: interleukins and antigen presentation
+endosomal vacuolar pathway,8,156.678709296933,Interferon stimulated genes: interleukins and antigen presentation
+regulation of ifng signaling,8,146.675700773296,Interferon stimulated genes: interleukins and antigen presentation
+signaling by leptin,8,146.327597401426,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 7 signaling,8,144.772556095918,Interferon stimulated genes: interleukins and antigen presentation
+signaling by kit in disease,8,142.747328268369,Interferon stimulated genes: interleukins and antigen presentation
+il 6 type cytokine receptor ligand interactions,8,135.55571136514,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 21 signaling,8,129.676558454575,Interferon stimulated genes: interleukins and antigen presentation
+interleukin receptor shc signaling,8,126.961705487328,Interferon stimulated genes: interleukins and antigen presentation
+signaling by scf kit,8,118.528091094451,Interferon stimulated genes: interleukins and antigen presentation
+signaling by pdgfra transmembrane juxtamembrane and kinase domain mutants,8,114.076154621425,Interferon stimulated genes: interleukins and antigen presentation
+downstream signal transduction,8,70.0614205115465,Interferon stimulated genes: interleukins and antigen presentation
+interleukin 2 signaling,8,69.0790644640539,Interferon stimulated genes: interleukins and antigen presentation
+signaling by fgfr1 in disease,8,61.0384884922606,Interferon stimulated genes: interleukins and antigen presentation
+neutrophil degranulation,8,59.1665299544991,Interferon stimulated genes: interleukins and antigen presentation
+signaling by pdgfr in disease,8,56.3820448215736,Interferon stimulated genes: interleukins and antigen presentation
+other interleukin signaling,8,44.5506943873638,Interferon stimulated genes: interleukins and antigen presentation
+antimicrobial peptides,8,32.2643668851777,Interferon stimulated genes: interleukins and antigen presentation
+erythropoietin activates phosphoinositide 3 kinase pi3k ,8,10.1212581875259,Interferon stimulated genes: interleukins and antigen presentation
+extracellular matrix organization,9,882.836874831376,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+platelet activation signaling and aggregation,9,710.397623516459,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+degradation of the extracellular matrix,9,709.608115981153,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+plasma lipoprotein assembly remodeling and clearance,9,594.82770639688,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+response to elevated platelet cytosolic ca2 ,9,476.965601706567,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+metabolism of fat soluble vitamins,9,442.443427446956,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+plasma lipoprotein remodeling,9,440.129346837546,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+plasma lipoprotein assembly,9,387.183556858671,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+integrin cell surface interactions,9,374.113721905267,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+collagen degradation,9,331.927792295582,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+metabolism of vitamins and cofactors,9,325.041326432876,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+plasma lipoprotein clearance,9,301.187625927805,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+activation of matrix metalloproteinases,9,293.906214959666,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+ecm proteoglycans,9,263.284963256929,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+regulation of insulin like growth factor igf transport and uptake by insulin like growth factor binding proteins igfbps ,9,234.529926389284,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+platelet aggregation plug formation ,9,224.291517823738,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+binding and uptake of ligands by scavenger receptors,9,176.799214452301,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+chylomicron remodeling,9,173.492668018301,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+chylomicron assembly,9,173.193649334821,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+formation of fibrin clot clotting cascade ,9,157.397816799309,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+cell surface interactions at the vascular wall,9,146.919029723694,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+hdl remodeling,9,134.079980692235,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+common pathway of fibrin clot formation,9,123.674952600442,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+syndecan interactions,9,111.511479427616,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+non integrin membrane ecm interactions,9,108.190307886118,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+nr1h3 nr1h2 regulate gene expression linked to cholesterol transport and efflux,9,93.0486425881273,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+scavenging by class a receptors,9,83.8282252044997,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+assembly of collagen fibrils and other multimeric structures,9,83.2033045297008,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+collagen formation,9,73.7557122245425,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+ldl clearance,9,70.8118249490694,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+gp1b ix v activation signalling,9,67.9464999863517,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+integrin signaling,9,65.3382914116848,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+intrinsic pathway of fibrin clot formation,9,48.9234734627053,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+molecules associated with elastic fibres,9,47.0755638011126,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+elastic fibre formation,9,38.215602354776,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+p130cas linkage to mapk signaling for integrins,9,32.3806770748569,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+gamma carboxylation transport and amino terminal cleavage of proteins,9,16.4759532711662,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+removal of aminoterminal propeptides from gamma carboxylated proteins,9,16.4759532711662,"Extracellular matrix organization, coagulation and lipoprotein metabolism"
+signaling by notch,10,1737.51112429954,NOTCH and FOXO mediated gene expression
+signaling by notch1 pest domain mutants in cancer,10,1420.65895950214,NOTCH and FOXO mediated gene expression
+signaling by notch1,10,1416.16119391482,NOTCH and FOXO mediated gene expression
+p75 ntr receptor mediated signalling,10,1353.98163433607,NOTCH and FOXO mediated gene expression
+nrif signals cell death from the nucleus,10,1095.04294873975,NOTCH and FOXO mediated gene expression
+cell death signalling via nrage nrif and nade,10,1045.39461920999,NOTCH and FOXO mediated gene expression
+regulated proteolysis of p75ntr,10,1033.13489171883,NOTCH and FOXO mediated gene expression
+signaling by notch3,10,965.585962593651,NOTCH and FOXO mediated gene expression
+signaling by notch4,10,963.515702582175,NOTCH and FOXO mediated gene expression
+signaling by notch2,10,882.180383874047,NOTCH and FOXO mediated gene expression
+eph ephrin signaling,10,758.225237892496,NOTCH and FOXO mediated gene expression
+eph ephrin mediated repulsion of cells,10,729.3724230212,NOTCH and FOXO mediated gene expression
+notch1 intracellular domain regulates transcription,10,678.635561114985,NOTCH and FOXO mediated gene expression
+foxo mediated transcription,10,550.545982582902,NOTCH and FOXO mediated gene expression
+activated notch1 transmits signal to the nucleus,10,430.291097325905,NOTCH and FOXO mediated gene expression
+notch2 activation and transmission of signal to the nucleus,10,412.423547614965,NOTCH and FOXO mediated gene expression
+notch3 activation and transmission of signal to the nucleus,10,397.021940134138,NOTCH and FOXO mediated gene expression
+notch4 activation and transmission of signal to the nucleus,10,379.022803768504,NOTCH and FOXO mediated gene expression
+amyloid fiber formation,10,262.115225273989,NOTCH and FOXO mediated gene expression
+circadian clock,10,202.282080912853,NOTCH and FOXO mediated gene expression
+foxo mediated transcription of oxidative stress metabolic and neuronal genes,10,173.292815150458,NOTCH and FOXO mediated gene expression
+transcriptional regulation of white adipocyte differentiation,10,145.603239292555,NOTCH and FOXO mediated gene expression
+regulation of foxo transcriptional activity by acetylation,10,143.908236106199,NOTCH and FOXO mediated gene expression
+mitochondrial biogenesis,10,141.876812299203,NOTCH and FOXO mediated gene expression
+foxo mediated transcription of cell cycle genes,10,130.961616133755,NOTCH and FOXO mediated gene expression
+notch hlh transcription pathway,10,119.336974759538,NOTCH and FOXO mediated gene expression
+ephb mediated forward signaling,10,105.921782005937,NOTCH and FOXO mediated gene expression
+p75ntr regulates axonogenesis,10,62.0444552639345,NOTCH and FOXO mediated gene expression
+transcriptional activation of mitochondrial biogenesis,10,51.1595912737272,NOTCH and FOXO mediated gene expression
+activation of ppargc1a pgc 1alpha by phosphorylation,10,27.0345510729176,NOTCH and FOXO mediated gene expression
+regulation of gene expression in beta cells,10,16.2923396015808,NOTCH and FOXO mediated gene expression
+regulation of tp53 activity through acetylation,10,15.6267459775709,NOTCH and FOXO mediated gene expression
+regulation of beta cell development,10,13.8271712756386,NOTCH and FOXO mediated gene expression
+foxo mediated transcription of cell death genes,10,11.849527103571,NOTCH and FOXO mediated gene expression
+initial triggering of complement,11,99.252521585158,Complement activation and cascade
+complement cascade,11,99.252521585158,Complement activation and cascade
+toll like receptor 4 tlr4 cascade,12,3831.84235216886,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+myd88 independent tlr4 cascade ,12,3815.88683668767,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+toll like receptor cascades,12,3691.44494011323,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+toll like receptor tlr1 tlr2 cascade,12,3630.26727910069,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+toll like receptor 9 tlr9 cascade,12,3540.73412728835,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+toll like receptor 10 tlr10 cascade,12,3501.49823894801,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+interleukin 1 signaling,12,3008.3228499907,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+interleukin 1 family signaling,12,2716.27863833495,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+interleukin 17 signaling,12,2427.95183282171,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+tak1 activates nfkb by phosphorylation and activation of ikks complex,12,2383.04277149463,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+death receptor signalling,12,2354.47171867141,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+fc epsilon receptor fceri signaling,12,2236.56322845447,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+clec7a dectin 1 signaling,12,2172.31430174354,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+c type lectin receptors clrs ,12,2164.74317352018,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+ddx58 ifih1 mediated induction of interferon alpha beta,12,2028.22371338493,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+nucleotide binding domain leucine rich repeat containing receptor nlr signaling pathways,12,1966.88016547522,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+tcr signaling,12,1948.71042697304,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+downstream signaling events of b cell receptor bcr ,12,1694.92640298566,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+traf6 mediated nf kb activation,12,1565.14484025133,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+p75ntr signals via nf kb,12,1473.28023193793,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+nod1 2 signaling pathway,12,1374.92575646412,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+nf kb is activated and signals survival,12,1366.57988424418,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+zbp1 dai mediated induction of type i ifns,12,1320.2143499774,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+cytosolic sensors of pathogen associated dna ,12,1260.16160377799,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+rip mediated nfkb activation via zbp1,12,1257.59520953174,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+diseases of immune system,12,1240.36732590591,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+antigen processing cross presentation,12,1084.82235520104,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+activated tak1 mediates p38 mapk activation,12,1074.84064242937,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+tnf signaling,12,1066.14951893515,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+tnfr1 induced nfkappab signaling pathway,12,939.334429319388,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+regulation of tnfr1 signaling,12,890.765757382355,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+the nlrp3 inflammasome,12,695.131880000509,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+purinergic signaling in leishmaniasis infection,12,619.373182578548,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+inflammasomes,12,605.999565423376,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+traf6 mediated irf7 activation,12,541.437374838026,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+jnk c jun kinases phosphorylation and activation mediated by activated human tak1,12,520.115974145145,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+ovarian tumor domain proteases,12,493.132414291773,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+traf3 dependent irf activation pathway,12,468.128222340583,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+irak1 recruits ikk complex,12,458.04375408565,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+negative regulators of ddx58 ifih1 signaling,12,442.30623242066,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+p75ntr recruits signalling complexes,12,435.699790346303,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+map3k8 tpl2 dependent mapk1 3 activation,12,405.280624481661,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+cd209 dc sign signaling,12,387.827960936029,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+ticam1 rip1 mediated ikk complex recruitment,12,382.522113896365,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+ikk complex recruitment mediated by rip1,12,335.464473853398,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+regulation of tlr by endogenous ligand,12,326.876451154346,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+nf kb activation through fadd rip 1 pathway mediated by caspase 8 and 10,12,316.419388929198,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+advanced glycosylation endproduct receptor signaling,12,296.867800872405,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+traf6 mediated irf7 activation in tlr7 8 or 9 signaling,12,275.429203729228,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+traf6 mediated induction of tak1 complex within tlr4 complex,12,274.86403007731,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+dectin 1 mediated noncanonical nf kb signaling,12,248.712306558226,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+tnfr1 induced proapoptotic signaling,12,220.559411757879,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+ticam1 traf6 dependent induction of tak1 complex,12,219.720578976172,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+sumoylation of immune response proteins,12,200.073479050623,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+irak4 deficiency tlr2 4 ,12,182.344803624351,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+activation of irf3 irf7 mediated by tbk1 ikk epsilon,12,157.471415734326,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+ticam1 dependent activation of irf3 irf7,12,85.8705892415133,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+regulation of innate immune responses to cytosolic dna,12,53.7360819832186,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+sting mediated induction of host immune responses,12,44.4160450907834,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+irf3 mediated induction of type i ifn,12,43.5567938061501,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+trafficking and processing of endosomal tlr,12,30.5919349324427,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+dscam interactions,12,25.8508677448782,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+interleukin 37 signaling,12,25.6668623435849,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+diseases of metabolism,12,11.90039877863,"NFkB mediated inflammation induced by TLRs, TCRs and BCRs"
+iron uptake and transport,13,12.9675610637919,Iron metabolism
+metabolism of porphyrins,13,7.96839968864896,Iron metabolism
+heme biosynthesis,13,4.99916137514292,Iron metabolism
+metabolism of amino acids and derivatives,14,22.3200797949409,Aminoacid metabolism
+phenylalanine and tyrosine metabolism,14,22.3200797949409,Aminoacid metabolism
