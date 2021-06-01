@@ -307,6 +307,7 @@ gene_variation <- as.data.frame(t(apply(genes_per_year[,-1], 1, diff))) %>%
   mutate(disease=genes_per_year$disease) %>%
   select(disease,everything())
 
+saveRDS(gene_variation,file = "intermediate/gene_variation_per_year.RDS")
 
 #write Table S3 in .csv format (new genes per disease per year)
 write.csv(gene_variation,file = "tables/table_S3.csv",row.names = F)
