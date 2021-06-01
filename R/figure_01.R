@@ -29,6 +29,9 @@ diseases <- unique(all_edges$Target)
 genes <- unique(all_edges$Source)
 years <- seq(1990,2018)
 
+#write Table S1 in .csv format (studied diseases in each class)
+write.csv(dis_class_df,file = "tables/table_S1.csv",row.names = F)
+
 ####Figure 01A - disease-disease networks from 1990 to 2018####
 #calculate disease-disease similarity in each year according to gene
 #sharing between diseases
@@ -81,9 +84,14 @@ for(i in 1:length(years)){
 
 genes_per_year[is.na(genes_per_year)] <- 0
 saveRDS(object = genes_per_year,file = "intermediate/genes_per_year.RDS")
+genes_per_year <- readRDS("intermediate/genes_per_year.RDS")
 
 dis_dis_edges[is.na(dis_dis_edges)] <- 0
 saveRDS(object = dis_dis_edges,file = "intermediate/dis_dis_edges.RDS")
+dis_dis_edges <- readRDS("intermediate/dis_dis_edges.RDS")
+
+#write Table S2 in .csv format (cummulative genes per disease per year)
+write.csv(genes_per_year,file = "tables/table_S2.csv",row.names = F)
 
 #get top9 diseases connected to more genes in each disease class in 2018
 top9_diseases_df <- genes_per_year %>%
@@ -141,7 +149,7 @@ for (i in 1:length(years_plot)){
 mypal <- colorRampPalette(c("grey88", "black"))(10000)
 weights_log_vec_sorted <- sort(unique(weights_log_vec))
 pal <- map2color(weights_log_vec_sorted,mypal)
-pal_final <- x
+pal_final <- weights_log_vec_sorted
 names(pal_final) <- pal
 
 #create a network for each year with dis-dis relationships
@@ -243,3 +251,121 @@ for(i in 1:length(p_list)){
 }
 
 ####Figure 01B - number of genes in each category per year####
+genes_per_year_melt <- melt(genes_per_year)
+genes_per_year_melt$variable <- as.numeric(as.character(genes_per_year_melt$variable))
+
+genes_per_year_all <- genes_per_year_melt %>%
+  dplyr::group_by(variable) %>%
+  dplyr::summarise(disease="all",
+            value=sum(value)) %>%
+  dplyr::ungroup() %>%
+  dplyr::rename(class=disease) %>%
+  dplyr::select(class,variable,value)
+
+colors_plot <- c("black",colors)
+names(colors_plot)[1] <- "all"
+p <- genes_per_year_melt %>%
+  dplyr::left_join(dis_class_df,by="disease") %>%
+  dplyr::group_by(class,variable) %>%
+  dplyr::summarise(value=sum(value)) %>%
+  dplyr::ungroup() %>%
+  dplyr::select(class,variable,value) %>%
+  rbind(genes_per_year_all) %>%
+  ggplot(aes(x=variable,y=value,color=class))+
+  geom_line()+
+  scale_color_manual(values = colors_plot)+
+  scale_x_continuous(name = "year",breaks = years_plot)+
+  scale_y_continuous(name = "genes")+
+  theme_classic()
+pdf(file = "figures/figure_01/panel_B/genes_per_year.pdf",
+    width = 5,height = 3.6)
+print(p)
+dev.off()
+
+####Figure 01C - distribution of genes in 2018 per disease category####
+genes_2018 <- genes_per_year_melt %>%
+  filter(variable==2018)
+
+#violin plot of genes per disease in each disease class
+p <- genes_2018 %>%
+  left_join(dis_class_df,by="disease") %>%
+  ggplot(aes(x=class,y=value))+
+  geom_violin(aes(fill=class),show.legend = F)+
+  geom_jitter(aes(fill=class),width = .3,shape=21,colour="black",show.legend = F)+
+  scale_fill_manual(values=colors)+
+  scale_y_continuous(name = "genes")+
+  scale_y_continuous(name = "category")+
+  theme_minimal()
+pdf("figures/figure_01/panel_C/genes_in_2018_violin_plot.pdf",
+    width = 3.63,height = 3.57)
+print(p)
+dev.off()
+
+####Figure 01D - new genes per year in each disease class####
+#calculate the yearly variation of genes
+gene_variation <- as.data.frame(t(apply(genes_per_year[,-1], 1, diff))) %>%
+  mutate(disease=genes_per_year$disease) %>%
+  select(disease,everything())
+
+
+#write Table S3 in .csv format (new genes per disease per year)
+write.csv(gene_variation,file = "tables/table_S3.csv",row.names = F)
+
+gene_variation_melt <- melt(gene_variation)
+gene_variation_melt$variable <- as.numeric(as.character(gene_variation_melt$variable))
+
+#plot the yearly variation of genes in each class
+#line plot
+p <- gene_variation_melt %>%
+  left_join(dis_class_df,by="disease") %>%
+  dplyr::group_by(class,variable) %>%
+  dplyr::summarise(value=sum(value)) %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(variable != 2018) %>%
+  ggplot(aes(x=variable,y=value,color=class))+
+  geom_line()+
+  scale_color_manual(values = colors)+
+  facet_wrap(facets = ~class)+
+  theme_minimal()
+pdf("figures/figure_01/panel_D/new_genes_per_year_class_line.pdf",
+    width = 7.5,height = 3.6)
+print(p)
+dev.off()
+
+#ridge plot
+p <- gene_variation_melt %>%
+  left_join(dis_class_df,by="disease") %>%
+  dplyr::group_by(class,variable) %>%
+  dplyr::summarise(value=sum(value)) %>%
+  dplyr::ungroup() %>%
+  dplyr::filter(variable != 2018) %>%
+  dplyr::mutate(class=factor(class,
+                             levels = rev(c("INFECTIOUS","INFLAMMATORY","PSYCHIATRIC")))) %>%
+  ggplot(aes(x=variable,y=class,fill=class,color=class))+
+  geom_ridgeline(aes(height=value),scale=.005,alpha=0.274,size=.2)+
+  scale_fill_manual(values=colors)+
+  scale_color_manual(values=colors)+
+  scale_x_discrete(limits=c(1991,2000,2010,2017))+
+  theme_ridges(font_size = 10)+
+  theme(legend.position = 'none')
+pdf(file = "figures/figure_01/panel_D/new_genes_per_year_class_ridge.pdf",
+    width = 3.43,height = 3.57)
+print(p)
+dev.off()
+
+####Figure 01E - new genes per year in each disease####
+#plot the yearly variation of genes in all diseases
+p <- gene_variation_melt %>%
+  dplyr::left_join(dis_class_df,by="disease") %>%
+  ggplot(aes(x=variable,y=disease,fill=class,color=class))+
+  geom_ridgeline(aes(height=value,color=colors_plot_2),
+                 scale=0.05,alpha=0.274,color="transparent")+
+  scale_fill_manual(values=colors)+
+  scale_y_discrete(limits=diseases)+
+  scale_x_discrete(limits=c(1991,2000,2010,2017))+
+  theme_ridges(font_size = 7)+
+  theme(legend.position = 'none')
+pdf(file = "figures/figure_01/panel_E/new_genes_per_year_per_disease_all.pdf",
+    width = 4.35,height = 9.5)
+print(p)
+dev.off()
