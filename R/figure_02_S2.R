@@ -34,6 +34,10 @@ diseases <- unique(all_edges$Target)
 genes <- unique(all_edges$Source)
 years <- seq(1990,2018)
 
+#top 9 diseases
+top_9_df <- readRDS("intermediate/top9_diseases_df.RDS")
+top_9 <- top_9_df$disease
+
 #calculate dis-dis similarity between diseases of combinations of classes
 #in each year
 #Method: run enricher() function from clusterProfiler package to obtain
@@ -233,19 +237,6 @@ for(i in 1:length(selected_between[c(1,2,4)])){
                        breaks = seq(0,max,max/1000),main = yr)
     dev.off()
   }
-}
-
-#make gifs from heatmaps from 1990 to 2018 (yearly)
-for(i in 1:length(folders)){
-  path <- paste0("figures/similarity_evolution/",folders[i],"/")
-  imgs <- list.files(path,full.names = T)
-  img_list <- lapply(imgs, image_read)
-  img_joined <- image_join(img_list)
-  img_animated <- image_animate(img_joined, delay = 50,loop = 1)
-  path_out <- paste0(path,folders[i],"_evolution.gif")
-  image_write(image = img_animated,
-              path = path_out)
-  print(i)
 }
 
 ####figure 2B and 2C - similarity-to-paper ratio####
