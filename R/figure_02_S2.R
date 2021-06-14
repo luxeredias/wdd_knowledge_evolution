@@ -21,6 +21,12 @@ library(ggrepel)
 library(ggraph)
 library(ggridges)
 
+#function to make first letter uppercase
+firstup <- function(x) {
+  substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+  x
+}
+
 options(stringsAsFactors = F)
 
 #load data and create necessary objects
@@ -106,27 +112,33 @@ top_9_2018 <- enr_all_out_2 %>%
 selected_between <- unique(enr_all_out_2$between)[c(4,8,2,7,5,6)]
 for(i in 1:length(selected_between)){
   sel <- selected_between[i]
-  p <- enr_all_out_2 %>%
+  df_plot <- enr_all_out_2 %>%
     filter(edge %in% top_9_2018$edge,
            class_source!=class_target,
            between==sel) %>%
+    mutate(Source=firstup(tolower(Source)),
+           Target=firstup(tolower(Target)))
+  p <- df_plot %>%
     ggplot(aes(x=year,y=logpval,color=edge))+
     geom_line(size=1)+
     scale_x_continuous(breaks = c(1990,2000,2010,2018))+
-    geom_text_repel(data = enr_all_out_2 %>%
+    geom_text_repel(data = df_plot %>%
                       filter(edge %in% top_9_2018$edge,
                              class_source!=class_target,
                              between==sel,
                              year==2018),
                     aes(label=Target),
-                    nudge_x = -10,nudge_y = 5,
-                    color="black",size=2.5,segment.size = .1)+
+                    nudge_x = -20,nudge_y = 5,
+                    color="black",size=3.5,segment.size = .2)+
     facet_wrap(facets = ~Source)+
     theme_minimal()+
-    ylab("similarity")+xlab("year")+
+    theme(strip.text.x = element_text(size = 15))+
+    theme(axis.text.x = element_text(size = 10))+
+    theme(axis.text.y = element_text(size = 10))+
+    ylab("Similarity")+xlab("Year")+
     theme(legend.position = "none")
   fil <- paste0("figures/figure_S2/",sel,"_similarity_evolution.pdf")
-  pdf(file = fil,width = 13.70,height = 10.15)
+  pdf(file = fil,width = 12,height = 7)
   print(p)
   dev.off()
 }
