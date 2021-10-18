@@ -122,3 +122,30 @@ paper_100_less <- genes_papers_per_disease %>%
   pull(papers) %>% as.numeric()
 
 t.test(x = paper_100_less,y = papers_100_more)
+
+#Make correlation between number of papers and number of genes for each disease
+#(new figure S1C after iScience revision)
+
+p <- genes_papers_per_disease %>%
+  group_by(disease,class) %>%
+  summarise(genes=mean(genes),papers=sum(papers)) %>%
+  ungroup() %>%
+  ggplot(aes(x=papers,y = genes))+
+  geom_point(aes(color=class))+
+  geom_smooth(method = "glm")+
+  theme_minimal()+
+  scale_color_manual(values = c("#68ad36","#ff743e","#00b7da"))+
+  scale_x_continuous(labels = scales::comma)
+  facet_wrap(facets = ~class)
+pdf(file = "figures/figure_S1/genes_vs_papers_2018_correlation.pdf",
+    width = 4.7,height = 3.7)
+print(p)
+dev.off()
+
+cor.df <- genes_papers_per_disease %>%
+  group_by(disease,class) %>%
+  summarise(genes=mean(genes),papers=sum(papers)) %>%
+  ungroup()
+
+cor.test(x = cor.df$papers,
+         y = cor.df$genes)
